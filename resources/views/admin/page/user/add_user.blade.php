@@ -1,0 +1,73 @@
+@extends('welcome')
+@section('title', 'Thêm Tài Khoản')
+
+@section('content')
+    <div class="container-fluid content-inner mt-n5 py-0">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Thêm Tài Khoản Mới</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <form action="{{ route('users.store') }}" method="POST"> <!-- Đường dẫn đến route lưu khu vực -->
+                            @csrf <!-- Thêm token bảo mật -->
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <div>
+                                        @foreach ($errors->all() as $error)
+                                            <span>{{ $error }}</span>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Tên Tài Khoản</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Địa Chỉ Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Mật Khẩu</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password_confirmation" class="form-label">Nhập Lại Mật Khẩu</label>
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="note" class="form-label">Ghi Chú</label>
+                                <input type="text" class="form-control" id="note" name="note" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Vai Trò</label>
+                                <select name="role" id="role" class="form-control">
+                                    <option value="tanent" >tanent</option>
+                                    <option value="admin" >Admin</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="area_id" class="form-label">Chọn Khu Vực</label>
+                                <select class="form-control" id="area_id" name="area_id" >
+                                    <option value="">-- Chọn Khu Vực --</option>
+                                    @foreach($areas as $area)
+                                        <option  value="{{ $area->area_id }}">{{ $area->name }}</option> <!-- Hiển thị ID và tên của khu vực -->
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                            <a href="{{ route('user.list') }}" class="btn btn-secondary">Quay lại</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
