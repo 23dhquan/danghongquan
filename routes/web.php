@@ -1,13 +1,12 @@
 <?php
 
-use App\Http\Controllers\AreaController;
+use App\Http\Controllers\Admin\AreaController;
+use App\Http\Controllers\Admin\HouseController;
+use App\Http\Controllers\Admin\TenantController;
+use App\Http\Controllers\Admin\TenantDetailController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\HouseController;
-use App\Http\Controllers\TenantController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-
 
 
 Route::get('/auth/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -44,10 +43,15 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('/house/{id}', [HouseController::class, 'destroy'])->name('house.destroy');
 
     //Tenant
+    Route::get('/tenant-list', [TenantController::class, 'index'])->name('tenant.list');
     Route::get('/house-tenant', [HouseController::class, 'tenant'])->name('house-tenant.list');
-
-
+    Route::post('/tenants/store', [TenantController::class, 'store'])->name('tenants.store');
+    Route::delete('/tenants/{id}', [TenantController::class, 'destroy'])->name('tenants.destroy');
     //Tenant Detail
-    Route::get('/tenant-detail-list', [TenantController::class, 'index'])->name('tenant-detail.list');
-
+    Route::get('/tenant-detail-list', [TenantDetailController::class, 'index'])->name('tenant-detail.list');
+    Route::get('/add-tenant-detail', [TenantDetailController::class, 'create'])->name('tenant-detail.create');
+    Route::post('/tenant-detail/store', [TenantDetailController::class, 'store'])->name('tenant-detail.store');
+    Route::get('/edit-tenant-detail/{id}', [TenantDetailController::class, 'edit'])->name('tenant-detail.edit');
+    Route::put('/edit-tenant-detail/{id}', [TenantDetailController::class, 'update'])->name('tenant-detail.update');
+    Route::delete('/tenant-detail/{id}', [TenantDetailController::class, 'destroy'])->name('tenant-detail.destroy');
 });

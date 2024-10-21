@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Area;
 use App\Models\User;
@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $user = User::all();
-        return view('admin.page.user.user_lissting',compact('user'));
+        return view('admin.page.user.user_lissting', compact('user'));
     }
     public function create()
     {
@@ -28,7 +26,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'note' => 'required|string|max:255',
+            'note' => 'nullable|string|max:255',
             'role' => 'required|string|max:255',
             'area_id' => 'required|integer',
         ]);

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Area;
 use App\Models\House;
 use App\Models\Tenant;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Log;
 
 class HouseController extends Controller
 {
@@ -100,7 +100,7 @@ class HouseController extends Controller
     {
         // Lấy tất cả các ngôi nhà
         $houses = House::all();
-
+        $users = User::where('role', 'tenant')->get();
         // Vòng lặp đầu tiên: Cập nhật giá trị is_rented
         foreach ($houses as $house) {
             // Kiểm tra xem có tenant nào thuê house_id này không
@@ -120,7 +120,7 @@ class HouseController extends Controller
         }
 
         // Trả về view cùng với danh sách houses
-        return view('admin.page.tenant.tenant_listting', compact('houses'));
+        return view('admin.page.tenant.tenant_listting', compact('houses','users'));
     }
 
 

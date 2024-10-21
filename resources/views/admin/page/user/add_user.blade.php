@@ -41,12 +41,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="note" class="form-label">Ghi Chú</label>
-                                <input type="text" class="form-control" id="note" name="note" required>
+                                <input type="text" class="form-control" id="note" name="note" >
                             </div>
                             <div class="form-group">
                                 <label for="role">Vai Trò</label>
                                 <select name="role" id="role" class="form-control">
-                                    <option value="tanent" >tanent</option>
+                                    <option value="tenant" >tenant</option>
                                     <option value="admin" >Admin</option>
                                 </select>
                             </div>

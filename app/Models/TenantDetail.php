@@ -10,6 +10,7 @@ class TenantDetail extends Model
     use HasFactory;
     protected $table = 'tenants_details';
     public $primaryKey ='tenant_detail_id';
+    public $timestamps = false;
     protected $fillable = [
         'tenant_id ',      // Mã người dùng (foreign key từ bảng users)
         'leader',     // Mã nhà trọ thuê (foreign key từ bảng houses)

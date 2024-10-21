@@ -10,7 +10,7 @@
                         <div class="header-title">
                             <h4 class="card-title">Danh Sách Người Thuê</h4>
                         </div>
-                        <a href="" class="text-center btn btn-primary btn-icon mt-lg-0 mt-md-0 mt-3" title="Thêm khu vực mới">
+                        <a href="{{route('tenant-detail.create')}}" class="text-center btn btn-primary btn-icon mt-lg-0 mt-md-0 mt-3" title="Thêm khu vực mới">
                             <i class="btn-inner">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -29,34 +29,37 @@
                                     <th>Tên</th>
                                     <th>Email</th>
                                     <th>Số Điện Thoại</th>
+                                    <th>Phòng</th>
                                     <th>Số CCCD</th>
-                                    <th>Hình CCCD Trước</th>
-                                    <th>Hình CCCD Sau</th>
+                                    <th>Ảnh</th>
                                     <th>Giới Tính</th>
                                     <th>Ngày Sinh</th>
+                                    <th>Hành Động</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach ($tenantDetails as $tenantDetail)
                                     <tr>
                                         <td>{{ $tenantDetail->tenant_detail_id }}</td>
-                                        <td>{{ $tenantDetail->full_name }}</td>
+                                        <td>{{ $tenantDetail->full_name }} <span style="color: red"  >
+                                                    {{ $tenantDetail->leader == 1 ? '*' : '' }}
+                                                </span></td>
                                         <td>{{ $tenantDetail->email }}</td>
                                         <td>{{ $tenantDetail->phone }}</td>
+                                        <td> {{$tenantDetail->house_name_teantDetail}}</td>
                                         <td>{{ $tenantDetail->identity_card }}</td>
-                                        <td>{{ $tenantDetail->identity_card_image }}</td>
-                                        <td>{{ $tenantDetail->portrait_image }}</td>
-                                        <td>{{ $tenantDetail->gender }}</td>
-                                        <td>{{ $tenantDetail->data_of_birth }}</td>
 
-
-                                        <td>
-                                                <span class="badge status-badge {{ $tenantDetail->leader == 1 ? 'bg-success' : 'bg-danger' }}">
-                                                    {{ $tenantDetail->status == 1 ? 'Đại Diện' : '' }}
-                                                </span>
+                                        <td> @if($tenantDetail->portrait_image)
+                                                <img style="width: 20px;" src="{{ asset($tenantDetail->portrait_image) }}" alt="Portrait Image">
+                                            @endif
                                         </td>
+                                        <td>{{ $tenantDetail->gender }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($tenantDetail->date_of_birth)->format('d-m-Y') }}</td>
+
+
                                         <td class="d-flex align-items-center">
-                                            <a href="{{ route('tenantDetail.edit', $tenantDetail->user_id) }}" class="btn btn-sm btn-icon btn-warning me-2 mr-2">
+                                            <a href="{{ route('tenant-detail.edit', $tenantDetail->tenant_detail_id) }}" class="btn btn-sm btn-icon btn-warning me-2 mr-2">
                                                     <span class="btn-inner">
                                                        <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                           <path d="M11.4925 2.78906H7.75349C4.67849 2.78906 2.75049 4.96606 2.75049 8.04806V16.3621C2.75049 19.4441 4.66949 21.6211 7.75349 21.6211H16.5775C19.6625 21.6211 21.5815 19.4441 21.5815 16.3621V12.3341" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -66,7 +69,7 @@
                                                     </span>
                                             </a>
 
-                                            <form action="{{ route('tenantDetail.destroy', $tenantDetail->user_id) }}" method="POST" class="delete-form me-2">
+                                            <form action="{{ route('tenant-detail.destroy', $tenantDetail->tenant_detail_id) }}" method="POST" class="delete-form me-2">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-icon btn-danger" style=" border: none;">
@@ -79,26 +82,7 @@
                                                     </span>
                                                 </button>
                                             </form>
-                                            <button class="btn-reset-password btn btn-sm btn-icon btn-primary me-2" id="reset-password-{{ $tenantDetail->user_id }}" data-user-id="{{ $tenantDetail->user_id }}" style="border: none">
-                                                <svg style="width: 20px !important; height: 20px !important;" class="icon-32" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.334 2.75H7.665C4.644 2.75 2.75 4.889 2.75 7.916V16.084C2.75 19.111 4.635 21.25 7.665 21.25H16.333C19.364 21.25 21.25 19.111 21.25 16.084V7.916C21.25 4.889 19.364 2.75 16.334 2.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6889 11.9999C10.6889 13.0229 9.85986 13.8519 8.83686 13.8519C7.81386 13.8519 6.98486 13.0229 6.98486 11.9999C6.98486 10.9769 7.81386 10.1479 8.83686 10.1479H8.83986C9.86086 10.1489 10.6889 10.9779 10.6889 11.9999Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M10.6919 12H17.0099V13.852" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M14.1816 13.852V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </button>
 
-                                            <form action="{{ route('tenantDetail.toggleStatus', $tenantDetail->user_id) }}" method="POST" class="toggle-status-form" id="toggle-status-{{ $tenantDetail->user_id }}">
-                                                @csrf
-                                                <input type="hidden" name="status" value="{{ $tenantDetail->status ? 0 : 1 }}">
-                                                <button type="submit" class="btn btn-sm btn-icon {{ $tenantDetail->status ? 'btn-success' : 'btn-danger' }}" style="border: none;">
-                                                    <svg style="width: 20px !important; height: 20px !important;" class="icon-32" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M16.4242 5.56204C15.8072 3.78004 14.1142 2.50004 12.1222 2.50004C9.60925 2.49004 7.56325 4.51804 7.55225 7.03104V7.05104V9.19804" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.933 21.0005H8.292C6.198 21.0005 4.5 19.3025 4.5 17.2075V12.9195C4.5 10.8245 6.198 9.12646 8.292 9.12646H15.933C18.027 9.12646 19.725 10.8245 19.725 12.9195V17.2075C19.725 19.3025 18.027 21.0005 15.933 21.0005Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        <path d="M12.1128 13.9526V16.1746" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    </svg>
-                                                </button>
-                                            </form>
                                         </td>
 
                                     </tr>
@@ -112,8 +96,6 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.querySelectorAll('.delete-form').forEach(form => {

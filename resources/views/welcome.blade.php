@@ -3,6 +3,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>RoomMate - @yield('title')</title>
 
@@ -231,7 +232,8 @@
 
 <!-- Wrapper End-->
 <!-- offcanvas start -->
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Library Bundle Script -->
 <script src="{{asset("/assets/js/core/libs.min.js")}}"></script>
 

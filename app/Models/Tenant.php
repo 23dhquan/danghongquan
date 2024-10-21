@@ -10,7 +10,7 @@ class Tenant extends Model
     use HasFactory;
     public $primaryKey ='tenant_id';
     protected $table = 'tenants';
-
+    public $timestamps = false;
     protected $fillable = [
         'user_id',      // Mã người dùng (foreign key từ bảng users)
         'house_id',
