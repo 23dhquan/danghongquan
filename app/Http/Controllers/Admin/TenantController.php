@@ -2,20 +2,33 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Deposit;
 use App\Models\House;
+use App\Models\Penalty;
 use App\Models\Tenant;
 use App\Models\TenantDetail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class TenantController extends Controller
 {
 
     public function index()
     {
-        $tenants = Tenant::all();
+
+            $curentArea = auth()->user();
+        if ($curentArea->area_id === 0) {
+            // Nếu area_id của người dùng là 0, lấy tất cả tenants chưa bị xóa
+            $tenants = Tenant::where('is_delete', 0)->get();
+        } else {
+            // Lấy danh sách tenants có area_id khớp với area_id của user
+            $tenants = Tenant::whereHas('house', function ($query) use ($curentArea) {
+                $query->where('area_id', $curentArea->area_id);
+            })->where('is_delete', 0)->get();
+        }
 
         foreach ($tenants as $tenant) {
             $house = House::find($tenant->house_id);
@@ -45,6 +58,7 @@ class TenantController extends Controller
             'house_id' => 'required|integer',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
+
         ]);
 
         // Lưu thông tin người thuê
@@ -53,15 +67,43 @@ class TenantController extends Controller
             'house_id' => $request->house_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
+            'is_delete' => 0
         ]);
 
         return response()->json(['message' => 'Thông tin người thuê đã được thêm thành công!'], 200);
     }
     public function destroy($tenant_id)
     {
-        $tenant=Tenant::findOrFail($tenant_id);
-        $tenant->delete();
-        return redirect()->back()->with('success');
+        $tenant = Tenant::find($tenant_id);
+
+        if (!$tenant) {
+            return response()->json(['success' => false, 'message' => 'Tenant not found'], 404);
+        }
+
+        // Kiểm tra nếu có khoản phạt với status = 0
+        $house_id = $tenant->house_id;
+        $hasUnresolvedPenalty = Penalty::where('house_id', $house_id)
+            ->where('status', 0)
+            ->exists();
+
+        if ($hasUnresolvedPenalty) {
+            return response()->json(['success' => false, 'message' => 'Còn Phếu Phạt Chưa Xử Lý'], 400);
+        }
+        $hasDeposit = Deposit::where('house_id', $house_id)
+            -> where('status', 0)
+            ->exists();
+        if($hasDeposit){
+            return  response()->json(['success' => false,'message' =>'Chưa Hoàn Tiền Cọc'], 400);
+        }
+
+        $tenant->is_delete = 1;
+        $tenant->save();
+
+        return response()->json(['success' => true, 'message' => 'Xóa Thành Công']);
     }
+
+
+
+
 
 }

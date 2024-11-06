@@ -30,10 +30,6 @@
                                     <th>Email</th>
                                     <th>Số Điện Thoại</th>
                                     <th>Phòng</th>
-                                    <th>Số CCCD</th>
-                                    <th>Ảnh</th>
-                                    <th>Giới Tính</th>
-                                    <th>Ngày Sinh</th>
                                     <th>Hành Động</th>
 
                                 </tr>
@@ -47,15 +43,9 @@
                                                 </span></td>
                                         <td>{{ $tenantDetail->email }}</td>
                                         <td>{{ $tenantDetail->phone }}</td>
-                                        <td> {{$tenantDetail->house_name_teantDetail}}</td>
-                                        <td>{{ $tenantDetail->identity_card }}</td>
+                                        <td> {{$tenantDetail->house_name_teantDetail }}</td>
 
-                                        <td> @if($tenantDetail->portrait_image)
-                                                <img style="width: 20px;" src="{{ asset($tenantDetail->portrait_image) }}" alt="Portrait Image">
-                                            @endif
-                                        </td>
-                                        <td>{{ $tenantDetail->gender }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($tenantDetail->date_of_birth)->format('d-m-Y') }}</td>
+
 
 
                                         <td class="d-flex align-items-center">

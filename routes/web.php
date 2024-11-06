@@ -1,29 +1,51 @@
 <?php
 
 use App\Http\Controllers\Admin\AreaController;
+use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\HouseController;
+use App\Http\Controllers\Admin\PenaltyController;
+use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\TenantDetailController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WaterBillController;
 use App\Http\Controllers\Auth\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/auth/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/auth/login', [LoginController::class, 'login']);
 Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
+//Route::middleware('admin')->group(function () {
+//    $checkAdminAccess = function ($controller, $method = 'index') {
+//        if (Auth::user()->role == 'admin') {
+//            return redirect('/dashboard')->with('error', 'Bạn không có quyền truy cập.');
+//        }
+//        return app($controller)->$method();
+//    };
+//
+//    Route::get('/area/list', $checkAdminAccess(AreaController::class,'index'))->name('area.list');
+//});
+Route::get('/',function () {return view('admin.dashboard');})->name('dashboard');
+
+Route::group(['middleware' => 'tenant'], function () {
+//    Route::get('/',function () {return view('admin.dashboard');})->name('dashboard');
+
+});
 Route::group(['middleware' => 'admin'], function () {
 
-    Route::get('/',function () {return view('admin.dashboard');})->name('dashboard');
+   Route::get('/',function () {return view('admin.dashboard');})->name('dashboard');
 
-    //Area
+
+//    //Area
+
     Route::get('/area-list', [AreaController::class, 'index'])->name('area.list');
     Route::get('/add-areas', [AreaController::class, 'create'])->name('areas.create');
     Route::post('/add-areas', [AreaController::class, 'store'])->name('areas.store');
     Route::delete('areas/{id}', [AreaController::class, 'destroy'])->name('areas.destroy');
     Route::get('/edit-areas/{id}', [AreaController::class, 'edit'])->name('areas.edit');
     Route::put('/edit-areas/{id}', [AreaController::class, 'update'])->name('areas.update');
-
     //User
     Route::get('/user-list',[UserController::class, 'index'])->name('user.list');
     Route::get('/add-users',[UserController::class, 'create'])->name('users.create');
@@ -54,4 +76,32 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/edit-tenant-detail/{id}', [TenantDetailController::class, 'edit'])->name('tenant-detail.edit');
     Route::put('/edit-tenant-detail/{id}', [TenantDetailController::class, 'update'])->name('tenant-detail.update');
     Route::delete('/tenant-detail/{id}', [TenantDetailController::class, 'destroy'])->name('tenant-detail.destroy');
+
+    //Service
+    Route::get('/service-list',[ServicesController::class, 'index'])->name('service.list');
+    Route::get('/add-service', [ServicesController::class, 'create'])->name('service.create');
+    Route::post('/add-service', [ServicesController::class, 'store'])->name('service.store');
+    Route::get('/edit-service/{id}', [ServicesController::class, 'edit'])->name('service.edit');
+    Route::put('/edit-service/{id}', [ServicesController::class, 'update'])->name('service.update');
+    Route::delete('/delete-service/{id}', [ServicesController::class, 'destroy'])->name('service.destroy');
+
+    //Penal
+   Route::get('/penalty-list',[PenaltyController::class, 'index'])->name('penalty.list');
+   Route::get('/add-penalty', [PenaltyController::class, 'create'])->name('penalty.create');
+   Route::post('/add-penalty', [PenaltyController::class, 'store'])->name('penalty.store');
+   Route::get('/edit-penalty/{id}', [PenaltyController::class, 'edit'])->name('penalty.edit');
+   Route::put('/edit-penalty/{id}', [PenaltyController::class, 'update'])->name('penalty.update');
+   Route::delete('/delete-penalty/{id}', [PenaltyController::class, 'destroy'])->name('penalty.destroy');
+    Route::post('/penalty/{id}/update-status', [PenaltyController::class, 'updateStatus'])->name('penalty.updateStatus');
+
+   //Deposit
+    Route::get('/deposit_list',[DepositController::class, 'index'])->name('deposit.list');
+    Route::get('/add-deposit',[DepositController::class,'create']) ->name('deposit.create');
+    Route::post('/add-deposit',[DepositController::class,'store']) ->name('deposit.store');
+    Route::get('/get-house-name/{house_id}', [DepositController::class, 'getHouseName']);
+    Route::delete('/delete-deposit/{id}', [DepositController::class, 'destroy'])->name('deposit.destroy');
+    Route::post('/deposit/{deposit_id}/update-status', [DepositController::class, 'updateStatus'])->name('deposit.updateStatus');
+
+    //Water
+    Route::get('/get-bills-list',[WaterBillController::class, 'index'])->name('bills.list');
 });

@@ -81,20 +81,14 @@
                                 <input type="file" class="form-control" id="identity_card_image" name="identity_card_image[]" multiple>
                             </div>
                             <div id="preview" class="d-flex flex-wrap mt-2">
-                                @if(isset($tenantDetail->identity_card_image))
-                                    @php
-                                        // Chuyển đổi chuỗi JSON thành mảng
-                                        $images = json_decode($tenantDetail->identity_card_image, true); // true để trả về mảng kết hợp
-                                    @endphp
-
-                                    @if(is_array($images)) <!-- Kiểm tra xem đã chuyển đổi thành mảng hay chưa -->
-                                    @foreach($images as $image)
-                                        <img src="{{ asset($image) }}" alt="Identity Card Image">
+                                @if(isset($house->images) && $house->images->isNotEmpty())
+                                    @foreach($house->images as $image)
+                                        <img src="{{ asset($image->image_path) }}" alt="House Image" style="width: 100px; height: 100px; object-fit: cover;" class="rounded">
                                     @endforeach
-                                    @else
-                                        <img src="{{ asset($tenantDetail->identity_card_image) }}" alt="Identity Card Image"> <!-- Nếu chỉ là một chuỗi -->
-                                    @endif
+                                @else
+                                    <p class="text-muted">Không có hình ảnh nào.</p>
                                 @endif
+
                             </div>
 
 

@@ -73,14 +73,8 @@
                                                     </span>
                                                     </button>
                                                 </form>
-                                                <button class="btn-reset-password btn btn-sm btn-icon btn-primary me-2" id="reset-password-{{ $users->user_id }}" data-user-id="{{ $users->user_id }}" style="border: none">
-                                                    <svg style="width: 20px !important; height: 20px !important;" class="icon-32" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.334 2.75H7.665C4.644 2.75 2.75 4.889 2.75 7.916V16.084C2.75 19.111 4.635 21.25 7.665 21.25H16.333C19.364 21.25 21.25 19.111 21.25 16.084V7.916C21.25 4.889 19.364 2.75 16.334 2.75Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.6889 11.9999C10.6889 13.0229 9.85986 13.8519 8.83686 13.8519C7.81386 13.8519 6.98486 13.0229 6.98486 11.9999C6.98486 10.9769 7.81386 10.1479 8.83686 10.1479H8.83986C9.86086 10.1489 10.6889 10.9779 10.6889 11.9999Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        <path d="M10.6919 12H17.0099V13.852" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                        <path d="M14.1816 13.852V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    </svg>
-                                                </button>
+
+
 
                                                 <form action="{{ route('users.toggleStatus', $users->user_id) }}" method="POST" class="toggle-status-form" id="toggle-status-{{ $users->user_id }}">
                                                     @csrf
@@ -93,7 +87,7 @@
                                                         </svg>
                                                     </button>
                                                 </form>
-</td>
+                                            </td>
 
                                         </tr>
                                     @endforeach
@@ -159,51 +153,7 @@
                 });
             });
         </script>
-        <script>
-            document.querySelectorAll('.btn-reset-password').forEach(button => {
-                button.addEventListener('click', function() {
-                    const userId = this.getAttribute('data-user-id');
 
-                    // Hiển thị hộp thoại nhập mật khẩu mới
-                    Swal.fire({
-                        title: 'Nhập mật khẩu mới',
-                        input: 'password',
-                        inputAttributes: {
-                            autocapitalize: 'off',
-                            placeholder: 'Mật khẩu mới'
-                        },
-                        showCancelButton: true,
-                        confirmButtonText: 'Cập nhật',
-                        cancelButtonText: 'Hủy',
-                        preConfirm: (newPassword) => {
-                            if (!newPassword) {
-                                Swal.showValidationMessage('Vui lòng nhập mật khẩu mới.');
-                            }
-                            return newPassword;
-                        }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: '{{ route("reset.password") }}',
-                                method: 'POST',
-                                data: {
-                                    new_password: result.value,
-                                    user_id: userId, // Gửi user_id nếu cần
-                                    _token: '{{ csrf_token() }}'
-                                },
-                                success: function(response) {
-                                    Swal.fire('Thành công!', response.message, 'success');
-                                },
-                                error: function(xhr) {
-                                    Swal.fire('Lỗi!', xhr.responseJSON.message || 'Có lỗi xảy ra.', 'error');
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-
-        </script>
         <script>
             document.querySelectorAll('.toggle-status-form').forEach(form => {
                 form.addEventListener('submit', function(e) {

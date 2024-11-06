@@ -1,5 +1,5 @@
 @extends('welcome')
-@section('title', 'Danh Sách Nhà')
+@section('title', 'Danh Sách Dịch Vụ')
 
 @section('content')
     <div class="container-fluid content-inner mt-n5 py-0">
@@ -8,15 +8,15 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Danh Sách Phòng</h4>
+                            <h4 class="card-title">Anh Sách Dịch Vụ</h4>
                         </div>
-                        <a href="{{ route('house.create') }}" class="text-center btn btn-primary btn-icon mt-lg-0 mt-md-0 mt-3" title="Thêm phòng mới">
+                        <a href="{{ route('service.create') }}" class="text-center btn btn-primary btn-icon mt-lg-0 mt-md-0 mt-3" title="Thêm Dịch Vụ mới">
                             <i class="btn-inner">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                 </svg>
                             </i>
-                            <span class="ms-2">Thêm Phòng</span>
+                            <span class="ms-2">Thêm Dịch Vụ</span>
                         </a>
                     </div>
 
@@ -28,25 +28,18 @@
                                     <th>#</th>
                                     <th>Tên</th>
                                     <th>Giá</th>
-                                    <th>Mô Tả</th>
-                                    <th>Khu Vực</th>
                                     <th>Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($houses as $house)
+                                @foreach ($services as $service)
                                     <tr>
-                                        <td>{{ $house->house_id }}</td>
-                                        <td>{{ $house->name }}</td>
-                                        <td>{{ number_format($house->price, 0, ',', '.') }} VNĐ</td>
-
-                                        <td>{{ $house->description }}</td>
-                                        <td>{{ $house->area_name }}
-
-
+                                        <td>{{ $service->service_id }}</td>
+                                        <td>{{ $service->name }}</td>
+                                        <td>{{ number_format($service->price, 0, ',', '.') }} VNĐ</td>
 
                                         <td class="d-flex align-items-center">
-                                            <a href="{{ route('house.edit', $house->house_id) }}" class="btn btn-sm btn-icon btn-warning me-2 mr-2">
+                                            <a href="{{ route('service.edit', $service->service_id) }}" class="btn btn-sm btn-icon btn-warning me-2 mr-2">
                                                 <span class="btn-inner">
                                                    <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                       <path d="M11.4925 2.78906H7.75349C4.67849 2.78906 2.75049 4.96606 2.75049 8.04806V16.3621C2.75049 19.4441 4.66949 21.6211 7.75349 21.6211H16.5775C19.6625 21.6211 21.5815 19.4441 21.5815 16.3621V12.3341" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -56,7 +49,7 @@
                                                 </span>
                                             </a>
 
-                                            <form action="{{ route('house.destroy', $house->house_id) }}" method="POST" class="delete-form">
+                                            <form action="{{ route('service.destroy', $service->service_id) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-icon btn-danger" style=" border: none;">
@@ -82,8 +75,7 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <script>
         document.querySelectorAll('.delete-form').forEach(form => {
@@ -125,7 +117,7 @@
                             error: function(response) {
                                 Swal.fire(
                                     'Error!',
-                                    'There was an error deleting the house.',
+                                    'There was an error deleting the area.',
                                     'error'
                                 );
                             }
@@ -134,8 +126,6 @@
                 });
             });
         });
-
-
     </script>
 
 @endsection

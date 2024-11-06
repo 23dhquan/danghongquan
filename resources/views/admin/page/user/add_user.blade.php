@@ -44,17 +44,23 @@
                                 <input type="text" class="form-control" id="note" name="note" >
                             </div>
                             <div class="form-group">
-                                <label for="role">Vai Trò</label>
+                                <label for="role">Vai Trò</label>
                                 <select name="role" id="role" class="form-control">
-                                    <option value="tenant" >tenant</option>
-                                    <option value="admin" >Admin</option>
+                                    @if(auth()->check() && auth()->user()->role === 'admin' && auth()->user()->area_id === 0)
+                                        <!-- Nếu người dùng là admin và area_id = 0, hiển thị cả hai tùy chọn -->
+                                        <option value="tenant">Tenant</option>
+                                        <option value="admin">Admin</option>
+                                    @else
+                                        <!-- Nếu không, chỉ hiển thị tùy chọn Tenant -->
+                                        <option value="tenant">Tenant</option>
+                                    @endif
                                 </select>
                             </div>
+
 
                             <div class="mb-3">
                                 <label for="area_id" class="form-label">Chọn Khu Vực</label>
                                 <select class="form-control" id="area_id" name="area_id" >
-                                    <option value="">-- Chọn Khu Vực --</option>
                                     @foreach($areas as $area)
                                         <option  value="{{ $area->area_id }}">{{ $area->name }}</option> <!-- Hiển thị ID và tên của khu vực -->
                                     @endforeach

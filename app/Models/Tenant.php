@@ -15,7 +15,8 @@ class Tenant extends Model
         'user_id',      // Mã người dùng (foreign key từ bảng users)
         'house_id',
         'start_date',   // Ngày bắt đầu thuê
-        'end_date'      // Ngày kết thúc thuê (nullable)
+        'end_date',
+        'is_delete'// Ngày kết thúc thuê (nullable)
     ];
 
     // Quan hệ
@@ -26,7 +27,7 @@ class Tenant extends Model
 
     public function house()
     {
-        return $this->belongsTo(House::class); // Người thuê 1 nhà trọ cụ thể
+        return $this->belongsTo(House::class, 'house_id'); // Đảm bảo 'house_id' là tên cột đúng trong bảng tenants
     }
 
     public function parkingCards()

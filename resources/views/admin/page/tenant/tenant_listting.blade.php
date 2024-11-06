@@ -52,9 +52,11 @@
         function showAddTenantModal(houseId) {
             let usersOptions = `
     <option value="" disabled selected>Chọn người dùng</option>
-    @foreach ($users as $user)
+
+
+            @foreach($filteredUsers as $user)
             <option value="{{ $user->user_id }}">{{ $user->name }}</option>
-    @endforeach
+        @endforeach
             `;
 
             Swal.fire({
@@ -65,7 +67,7 @@
         <input type="date" id="start_date" class="swal2-input" placeholder="Ngày bắt đầu">
         <input type="date" id="end_date" class="swal2-input" placeholder="Ngày kết thúc">
         `,
-                confirmButtonText: 'Lưu',
+                 confirmButtonText: 'Lưu',
                 showCancelButton: true, // Thêm nút hủy
                 cancelButtonText: 'Hủy',
                 focusConfirm: false,

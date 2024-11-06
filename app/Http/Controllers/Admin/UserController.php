@@ -2,22 +2,38 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index(){
-        $user = User::all();
+        $currentUser = auth()->user();
+
+        // Kiểm tra area_id của người dùng đăng nhập
+        if ($currentUser->area_id === 0) {
+            // Nếu area_id là 0, lấy tất cả người dùng
+            $user = User::all();
+        } else {
+            // Nếu không, chỉ lấy người dùng cùng khu vực
+            $user = User::where('area_id', $currentUser->area_id)->get();
+        }
         return view('admin.page.user.user_lissting', compact('user'));
     }
     public function create()
     {
-        $areas  = Area::all();
+//        $areas  = Area::all();
+        $curentArea = auth()->user();
+        if($curentArea->area_id ===0) {
+            $areas = Area::all();
+        } else {
+            $areas =Area::where('area_id', $curentArea->area_id)->get();
+        }
+
         return view('admin.page.user.add_user', compact('areas'));
     }
     public function store(Request $request)
@@ -53,7 +69,12 @@ class UserController extends Controller
     public function edit($user_id)
     {
         $users= User::findOrFail($user_id);
-        $areas = Area::all();
+        $curentArea = auth()->user();
+        if($curentArea->area_id ===0) {
+            $areas = Area::all();
+        } else {
+            $areas =Area::where('area_id', $curentArea->area_id)->get();
+        }
         return view('admin.page.user.edit_user', compact('users','areas'));
     }
     public function update(Request $request, $user_id)
@@ -62,9 +83,9 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user_id.'́,user_id',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user_id . ',user_id',
             'password' => 'nullable|string|min:6|confirmed',
-            'note' => 'required|string|max:255',
+            'note' => 'nullable|string|max:255',
             'role' => 'required|string|max:255',
             'area_id' => 'required|integer',
         ]);
@@ -73,7 +94,7 @@ class UserController extends Controller
         $users->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password ? bcrypt($request->password) : $users->password, // Giữ mật khẩu cũ nếu không nhập mới
+            'password' => $request->password ? bcrypt($request->password) : $users->password,
             'note' => $request->note,
             'role' => $request->role,
             'area_id' => $request->area_id,
@@ -81,6 +102,7 @@ class UserController extends Controller
 
         return redirect()->route('user.list')->with('success', 'User updated successfully!');
     }
+
 
     public function toggleStatus($id)
     {
@@ -95,21 +117,8 @@ class UserController extends Controller
         return response()->json(['success' => true, 'status' => $user->status]); // Trả về trạng thái mới
     }
 
-    public function resetPassword(Request $request)
-    {
-        // Kiểm tra người dùng đã đăng nhập hay chưa
-        $user = Auth::user();
 
-        if (!$user) {
-            return response()->json(['status' => 'error', 'message' => 'Người dùng chưa đăng nhập.'], 401);
-        }
 
-        // Cập nhật mật khẩu mới
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-
-        return response()->json(['status' => 'success', 'message' => 'Mật khẩu đã được cập nhật.']);
-    }
 
 
 }

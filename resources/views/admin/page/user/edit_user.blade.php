@@ -40,13 +40,13 @@
                             <div class="mb-3">
                                 <label for="note" class="form-label">Ghi Chú</label>
                                 <input type="text" class="form-control" id="note" name="note"
-                                       value="{{ old('note', $users->note) }}" required>
+                                       value="{{ old('note', $users->note) }}" >
                             </div>
 
                             <div class="form-group">
                                 <label for="role">Vai Trò</label>
                                 <select name="role" id="role" class="form-control">
-                                    <option value="tanent" {{ $users->role == 'tanent' ? 'selected' : '' }}>Tanent</option>
+                                    <option value="tenant" {{ $users->role == 'tenant' ? 'selected' : '' }}>Tenant</option>
                                     <option value="admin" {{ $users->role == 'admin' ? 'selected' : '' }}>Admin</option>
                                 </select>
                             </div>
@@ -54,7 +54,6 @@
                             <div class="mb-3">
                                 <label for="area_id" class="form-label">Chọn Khu Vực</label>
                                 <select class="form-control" id="area_id" name="area_id">
-                                    <option value="">-- Chọn Khu Vực --</option>
                                     @foreach($areas as $area)
                                         <option value="{{ $area->area_id }}"
                                             {{ old('area_id', $users->area_id) == $area->area_id ? 'selected' : '' }}>
@@ -63,7 +62,14 @@
                                     @endforeach
                                 </select>
                             </div>
-
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Mật Khẩu</label>
+                                <input type="password" class="form-control" id="password" name="password" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="password_confirmation" class="form-label">Nhập Lại Mật Khẩu</label>
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" >
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Cập Nhật</button>
                             <a href="{{ route('user.list') }}" class="btn btn-secondary">Quay lại</a>

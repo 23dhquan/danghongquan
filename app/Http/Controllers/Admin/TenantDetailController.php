@@ -7,7 +7,7 @@ use App\Models\Tenant;
 use App\Models\TenantDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 
 class TenantDetailController extends Controller
@@ -17,15 +17,58 @@ class TenantDetailController extends Controller
         $tenantDetails = TenantDetail::all();
         foreach ($tenantDetails as $tenantDetail) {
             $tenant = Tenant::find($tenantDetail->tenant_id);
-            $house_name = $tenant->house_id;
-            $house = House::find($house_name);
-            $tenantDetail->house_name_teantDetail = $house->name;
+
+            // Kiểm tra nếu tenant tồn tại
+            if ($tenant) {
+                // Nếu tenant đã bị xóa
+                if ($tenant->is_delete == 1) {
+                    $tenantDetail->house_name_teantDetail = "Đã chấm dứt thuê";
+                } else {
+                    // Lấy house_id
+                    $houseId = $tenant->house_id ?? null;
+
+                    if ($houseId) {
+                        $house = House::find($houseId);
+                        // Nếu house tồn tại
+                        if ($house) {
+                            $tenantDetail->house_name_teantDetail = $house->name ?? "Đang Trống";
+                        } else {
+                            $tenantDetail->house_name_teantDetail = "Đang Trống";
+                        }
+                    } else {
+                        $tenantDetail->house_name_teantDetail = "Đang Trống";
+                    }
+                }
+            } else {
+                // Nếu tenant không tồn tại
+                $tenantDetail->house_name_teantDetail = "Đang Trống";
+            }
         }
-        return view('admin.page.tenant.detail.detail_listting',compact('tenantDetails'));
+
+        return view('admin.page.tenant.detail.detail_listting', compact('tenantDetails'));
     }
+
+
     public function create()
     {
-        $tenants=Tenant::all();
+        // Lấy area_id từ người dùng hiện tại
+        $currentUser = auth()->user();
+        $currentAreaId = $currentUser->area_id;
+
+        $tenants = Tenant::where('is_delete', 0) // Lọc tenant có is_delete = 0
+        ->where(function ($query) use ($currentAreaId) {
+            // Nếu area_id của người dùng là 0, lấy tất cả tenants
+            if ($currentAreaId != 0) {
+                // Nếu area_id không phải là 0, lọc tenants trong các nhà thuộc khu vực của người dùng
+                $query->whereIn('house_id', function ($subQuery) use ($currentAreaId) {
+                    $subQuery->select('house_id')
+                        ->from('houses')
+                        ->where('area_id', $currentAreaId); // Lọc house theo area_id của user
+                });
+            }
+        })
+            ->get();
+
         foreach ($tenants as $teant)
         {
             $house = House::find($teant->house_id);
@@ -107,7 +150,22 @@ class TenantDetailController extends Controller
     }
     public function edit($id)
     {
-        $tenants=Tenant::all();
+        $currentUser = auth()->user();
+        $currentAreaId = $currentUser->area_id;
+
+        $tenants = Tenant::where('is_delete', 0) // Lọc tenant có is_delete = 0
+        ->where(function ($query) use ($currentAreaId) {
+            // Nếu area_id của người dùng là 0, lấy tất cả tenants
+            if ($currentAreaId != 0) {
+                // Nếu area_id không phải là 0, lọc tenants trong các nhà thuộc khu vực của người dùng
+                $query->whereIn('house_id', function ($subQuery) use ($currentAreaId) {
+                    $subQuery->select('house_id')
+                        ->from('houses')
+                        ->where('area_id', $currentAreaId); // Lọc house theo area_id của user
+                });
+            }
+        })
+            ->get();
         foreach ($tenants as $teant)
         {
             $house = House::find($teant->house_id);

@@ -15,7 +15,8 @@ class House extends Model
         'area_id',      // Mã khu vực liên kết (foreign key)
         'price',        // Giá thuê nhà trọ
         'description',    // Mô tả nhà trọ
-        'is_rented'
+        'is_rented',
+
     ];
 
     public function getAreaName()

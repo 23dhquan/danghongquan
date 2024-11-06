@@ -8,18 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class WaterBill extends Model
 {
     use HasFactory;
-    public $primaryKey = 'waterBill_Id';
+    protected $table = 'water_bills';
+    public $primaryKey = 'water_bill_id';
     protected $fillable = [
-        'house_id',      // Mã nhà trọ (foreign key từ bảng houses)
-        'month',         // Tháng ghi nhận hóa đơn
-        'units_used',    // Số m3 nước đã sử dụng
-        'unit_price',    // Giá mỗi m3 nước
-        'total_amount'   // Tổng số tiền nước phải trả
+        'house_id',
+        'billing_date',
+        'water_image',
+        'amount',
+
     ];
 
-    // Quan hệ
+
     public function house()
     {
-        return $this->belongsTo(House::class); // Hóa đơn nước thuộc về 1 nhà trọ
+        return $this->belongsTo(House::class);
     }
 }

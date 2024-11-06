@@ -9,16 +9,18 @@ class Penalty extends Model
 {
     use HasFactory;
     public  $primaryKey = 'penalty_id';
+    public $timestamps = false;
     protected $fillable = [
-        'tenant_id',      // Mã người thuê (foreign key từ bảng tenants)
-        'amount',         // Số tiền phạt
-        'description',    // Mô tả lý do phạt
-        'penalty_date'    // Ngày lập phiếu phạt
+        'house_id',
+        'amount',
+        'description',
+        'penalty_date',
+        'status'
     ];
 
-    // Quan hệ
-    public function tenant()
+
+    public function house()
     {
-        return $this->belongsTo(Tenant::class); // Một phiếu phạt thuộc về 1 người thuê
+        return $this->belongsTo(House::class, 'house_id'); // Giả sử house_id là khóa ngoại trong bảng penalties
     }
 }

@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Area;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class AreaController extends Controller
 {
     public function index() {
+        if (auth()->user()->note === 'Quản Trị Viên') {
+            return redirect()->route('house.list')->with('error', 'Admin thì không cho vào');
+        }
+        Log::info(auth()->user()->note);
         $areas = Area::all();
         return view('admin.page.area.area_lissting', compact('areas'));
     }
@@ -31,6 +36,7 @@ class AreaController extends Controller
             'name' => $request->name,
             'address' => $request->address,
         ]);
+
 
         // Chuyển hướng sau khi thêm thành công
         return redirect()->route('area.list');
