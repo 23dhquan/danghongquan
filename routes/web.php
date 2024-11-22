@@ -8,8 +8,11 @@ use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\TenantDetailController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\WaterBillController;
+use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\User\BillUserController;
+use App\Http\Controllers\Vnpay\PaymentBillController;
+use App\Http\Controllers\Vnpay\PaymentPenaltiesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,28 +20,30 @@ use Illuminate\Support\Facades\Route;
 Route::get('/auth/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/auth/login', [LoginController::class, 'login']);
 Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
-//Route::middleware('admin')->group(function () {
-//    $checkAdminAccess = function ($controller, $method = 'index') {
-//        if (Auth::user()->role == 'admin') {
-//            return redirect('/dashboard')->with('error', 'Bạn không có quyền truy cập.');
-//        }
-//        return app($controller)->$method();
-//    };
-//
-//    Route::get('/area/list', $checkAdminAccess(AreaController::class,'index'))->name('area.list');
-//});
-Route::get('/',function () {return view('admin.dashboard');})->name('dashboard');
+Route::get('/about1', function () {
+    return view('test2');
+})->name('huy');
+
+Route::get('/about', function () {
+    return view('test1');
+})->name('done');
 
 Route::group(['middleware' => 'tenant'], function () {
-//    Route::get('/',function () {return view('admin.dashboard');})->name('dashboard');
+    Route::get('/hoa-don', [BillUserController::class, 'index'])->name('bill.filter');
+    Route::get('/penalties', [BillUserController::class, 'showPenalties'])->name('penalty.filter');
+    Route::post('/vnpay/pay', [PaymentBillController::class, 'pay'])->name('vnpay.pay');
+    Route::post('/vnpay/pay/penalties', [PaymentPenaltiesController::class, 'payPenaltis'])->name('vnpay.pay.penalties');
+    Route::get('/vnpay/return/penalties', [PaymentPenaltiesController::class, 'returnPenaltis'])->name('vnpay.return.penalties');
+
+    Route::get('/vnpay/return', [PaymentBillController::class, 'return'])->name('vnpay.return');
 
 });
 Route::group(['middleware' => 'admin'], function () {
 
-   Route::get('/',function () {return view('admin.dashboard');})->name('dashboard');
 
+    Route::get('/',function () {return view('admin.dashboard');})->name('dashboard');
 
-//    //Area
+  //Area
 
     Route::get('/area-list', [AreaController::class, 'index'])->name('area.list');
     Route::get('/add-areas', [AreaController::class, 'create'])->name('areas.create');
@@ -102,6 +107,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::delete('/delete-deposit/{id}', [DepositController::class, 'destroy'])->name('deposit.destroy');
     Route::post('/deposit/{deposit_id}/update-status', [DepositController::class, 'updateStatus'])->name('deposit.updateStatus');
 
-    //Water
-    Route::get('/get-bills-list',[WaterBillController::class, 'index'])->name('bills.list');
+    //Water And Electricty
+    Route::get('/get-bills-list',[BillController::class, 'index'])->name('bills.list');
+
+    Route::get('/bill/create', [BillController::class, 'createBill'])->name('bill.create');
+    Route::post('/bill/store', [BillController::class, 'storeBill'])->name('bill.store');
+    Route::get('/bills-list',[BillController::class, 'bill'])->name('bill.list');
+    Route::post('/bill/update-status', [BillController::class, 'updateStatus'])->name('bill.updateStatus');
+
 });

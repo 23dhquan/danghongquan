@@ -9,12 +9,17 @@ class WaterBill extends Model
 {
     use HasFactory;
     protected $table = 'water_bills';
+    public $timestamps = false;
+
     public $primaryKey = 'water_bill_id';
     protected $fillable = [
         'house_id',
         'billing_date',
-        'water_image',
+        'water_reading',
         'amount',
+        'water_image',
+        'billing_date',
+        'status',
 
     ];
 

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Deposit;
+use App\Models\ElectricityBill;
 use App\Models\House;
+use App\Models\HouseBill;
 use App\Models\Penalty;
 use App\Models\Tenant;
 use App\Models\TenantDetail;
 use App\Models\User;
+use App\Models\WaterBill;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,8 +23,7 @@ class TenantController extends Controller
     {
 
             $curentArea = auth()->user();
-        if ($curentArea->area_id === 0) {
-            // Nếu area_id của người dùng là 0, lấy tất cả tenants chưa bị xóa
+        if ($curentArea->is_super_admin === 1) {
             $tenants = Tenant::where('is_delete', 0)->get();
         } else {
             // Lấy danh sách tenants có area_id khớp với area_id của user
@@ -94,6 +96,19 @@ class TenantController extends Controller
             ->exists();
         if($hasDeposit){
             return  response()->json(['success' => false,'message' =>'Chưa Hoàn Tiền Cọc'], 400);
+        }
+        $haswaterBill = WaterBill::where('house_id', $house_id)->where('status', 0)->exists();
+        if($haswaterBill){
+            return  response()->json(['success' => false,'message' => 'Chưa Thanh Toán Hóa Đơn Tiền Nước'], 400);
+        }
+        $hasElectricity  = ElectricityBill::where('house_id', $house_id)->where('status', 0)->exists();
+        if($hasElectricity){
+            return  response()->json(['success' => false,'message' => 'Chưa Thanh Toán Hóa Đơn Tiền Điện'], 400);
+        }
+        $hasHouseBill = HouseBill::where('house_id', $house_id)->where('status', 0)->exists();
+        if ($hasHouseBill) {
+            return  response()->json(['success' => false,'message' => 'Chưa Thanh Toán Hóa Đơn Tiền Nhà'], 400);
+
         }
 
         $tenant->is_delete = 1;

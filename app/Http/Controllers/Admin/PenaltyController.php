@@ -17,7 +17,7 @@ class PenaltyController extends Controller
         $penalties = Penalty::with('house')->get(); // Tải trước thông tin House
 
         // Nếu area_id của người dùng là 0, hiển thị tất cả các khoản phạt
-        if ($currentUser->area_id != 0) {
+        if ($currentUser->is_super_admin != 1) {
             // Lọc các khoản phạt theo area_id
             $penalties = $penalties->filter(function ($penalty) use ($currentUser) {
                 return $penalty->house->area_id == $currentUser->area_id;
@@ -36,7 +36,7 @@ class PenaltyController extends Controller
     {
         $currentUser = auth()->user();
 
-        if ($currentUser->area_id === 0) {
+        if ($currentUser->is_super_admin === 1) {
             // Nếu area_id của người dùng là 0, hiển thị tất cả các tenant không bị xóa
             $tenants = Tenant::where('is_delete', 0)->get();
         } else {

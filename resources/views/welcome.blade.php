@@ -254,6 +254,10 @@
 <script src="{{asset("/assets/vendor/aos/dist/aos.js")}}"></script>
 
 <script src="{{asset("/assets/js/hope-ui.js")}}" defer></script>
+<!-- Script của VNPay (mẫu) -->
+<script src="https://sandbox.vnpayment.vn/paymentv2/Scripts/jquery-3.6.0.min.js"></script>
+<script src="https://sandbox.vnpayment.vn/paymentv2/Scripts/custom.min.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Lấy tất cả các thẻ <a> trong menu

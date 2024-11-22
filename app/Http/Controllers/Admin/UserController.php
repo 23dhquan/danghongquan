@@ -15,7 +15,7 @@ class UserController extends Controller
         $currentUser = auth()->user();
 
         // Kiểm tra area_id của người dùng đăng nhập
-        if ($currentUser->area_id === 0) {
+        if ($currentUser->is_super_admin === 1) {
             // Nếu area_id là 0, lấy tất cả người dùng
             $user = User::all();
         } else {
@@ -28,7 +28,7 @@ class UserController extends Controller
     {
 //        $areas  = Area::all();
         $curentArea = auth()->user();
-        if($curentArea->area_id ===0) {
+        if($curentArea->is_super_admin ===1) {
             $areas = Area::all();
         } else {
             $areas =Area::where('area_id', $curentArea->area_id)->get();
@@ -70,7 +70,7 @@ class UserController extends Controller
     {
         $users= User::findOrFail($user_id);
         $curentArea = auth()->user();
-        if($curentArea->area_id ===0) {
+        if($curentArea->is_super_admin ===1) {
             $areas = Area::all();
         } else {
             $areas =Area::where('area_id', $curentArea->area_id)->get();

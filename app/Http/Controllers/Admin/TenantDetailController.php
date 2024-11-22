@@ -53,12 +53,12 @@ class TenantDetailController extends Controller
     {
         // Lấy area_id từ người dùng hiện tại
         $currentUser = auth()->user();
-        $currentAreaId = $currentUser->area_id;
+        $currentAreaId = $currentUser->is_super_admin;
 
         $tenants = Tenant::where('is_delete', 0) // Lọc tenant có is_delete = 0
         ->where(function ($query) use ($currentAreaId) {
             // Nếu area_id của người dùng là 0, lấy tất cả tenants
-            if ($currentAreaId != 0) {
+            if ($currentAreaId != 1) {
                 // Nếu area_id không phải là 0, lọc tenants trong các nhà thuộc khu vực của người dùng
                 $query->whereIn('house_id', function ($subQuery) use ($currentAreaId) {
                     $subQuery->select('house_id')
@@ -151,12 +151,12 @@ class TenantDetailController extends Controller
     public function edit($id)
     {
         $currentUser = auth()->user();
-        $currentAreaId = $currentUser->area_id;
+        $currentAreaId = $currentUser->is_super_admin;
 
         $tenants = Tenant::where('is_delete', 0) // Lọc tenant có is_delete = 0
         ->where(function ($query) use ($currentAreaId) {
             // Nếu area_id của người dùng là 0, lấy tất cả tenants
-            if ($currentAreaId != 0) {
+            if ($currentAreaId != 1) {
                 // Nếu area_id không phải là 0, lọc tenants trong các nhà thuộc khu vực của người dùng
                 $query->whereIn('house_id', function ($subQuery) use ($currentAreaId) {
                     $subQuery->select('house_id')

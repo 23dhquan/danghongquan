@@ -19,7 +19,8 @@ class User extends Authenticatable
         'role',
         'avatar',
         'status',// Quyền người dùng: 'admin' hoặc 'tenant'
-        'area_id'       // Khu vực mà người dùng quản lý/thuê (nullable)
+        'area_id',
+        'area_id_admin'// Khu vực mà người dùng quản lý/thuê (nullable)
     ];
 
     // Các quan hệ

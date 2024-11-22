@@ -19,7 +19,7 @@ class HouseController extends Controller
 
 
         $curentArea = auth()->user();
-        if($curentArea->area_id ===0) {
+        if($curentArea->is_super_admin ===1) {
             $houses = House::all();
         } else {
             $houses =House::where('area_id', $curentArea->area_id)->get();
@@ -34,7 +34,7 @@ class HouseController extends Controller
     public function create()
     {
         $curentArea = auth()->user();
-        if($curentArea->area_id ===0) {
+        if($curentArea->is_super_admin ===1) {
             $areas = Area::all();
         } else {
             $areas =Area::where('area_id', $curentArea->area_id)->get();
@@ -89,7 +89,7 @@ class HouseController extends Controller
         $house = House::findOrFail($id);
         $images = HouseImage::where('house_id', $id)->get(); // Lấy ảnh của phòng
         $curentArea = auth()->user();
-        if($curentArea->area_id ===0) {
+        if($curentArea->is_super_admin ===1) {
             $areas = Area::all();
         } else {
             $areas =Area::where('area_id', $curentArea->area_id)->get();
@@ -148,7 +148,7 @@ class HouseController extends Controller
     {
 
         $curentArea = auth()->user();
-        if($curentArea->area_id ===0) {
+        if($curentArea->is_super_admin ===1) {
             $houses = House::all();
         } else {
             $houses =House::where('area_id', $curentArea->area_id)->get();

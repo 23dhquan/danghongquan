@@ -17,7 +17,7 @@ class DepositController extends Controller
     {
 
         $curentArea = auth()->user();
-        if($curentArea->area_id ===0) {
+        if($curentArea->is_super_admin ===1) {
             $deposits = Deposit::all();
         } else {
             $deposits = Deposit::whereHas('house', function ($query) use ($curentArea) {
@@ -46,12 +46,12 @@ class DepositController extends Controller
     public function create() {
 
         $currentUser = auth()->user();
-        $currentAreaId = $currentUser->area_id;
+        $currentAreaId = $currentUser->is_super_admin;
 
 
         $tenants = Tenant::where('is_delete', 0)
             ->where(function ($query) use ($currentAreaId) {
-                if ($currentAreaId != 0) {
+                if ($currentAreaId != 1) {
                     $query->whereIn('house_id', function ($subQuery) use ($currentAreaId) {
                         $subQuery->select('house_id')
                             ->from('houses')

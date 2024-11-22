@@ -32,7 +32,11 @@ class LoginController extends Controller
                 // Lưu trữ thông tin người dùng trong session
                 $user = Auth::user();
                 if ($user->status == 1){
-                    return redirect()->intended('');
+                    if ($user->role === 'admin') {
+                        return redirect()->route('dashboard')->with('success', 'Chào mừng Admin!');
+                    } elseif ($user->role === 'tenant') {
+                        return redirect()->route('bill.filter')->with('success', 'Chào mừng Tenant!');
+                    }
                 }
                 else{
                     return back()->withErrors([
@@ -43,11 +47,7 @@ class LoginController extends Controller
 
 
             // Điều hướng dựa trên role
-            if ($user->role === 'admin') {
-                return redirect()->route('dashboard')->with('success', 'Chào mừng Admin!');
-            } elseif ($user->role === 'tenant') {
-                return redirect()->route('dashboard')->with('success', 'Chào mừng Tenant!');
-            }
+
 
             // Trường hợp không xác định role
             Auth::logout();

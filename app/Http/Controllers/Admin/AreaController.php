@@ -13,7 +13,6 @@ class AreaController extends Controller
         if (auth()->user()->note === 'Quản Trị Viên') {
             return redirect()->route('house.list')->with('error', 'Admin thì không cho vào');
         }
-        Log::info(auth()->user()->note);
         $areas = Area::all();
         return view('admin.page.area.area_lissting', compact('areas'));
     }
