@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Anh Sách Dịch Vụ</h4>
+                            <h4 class="card-title">Danh Sách Dịch Vụ</h4>
                         </div>
                         <a href="{{ route('service.create') }}" class="text-center btn btn-primary btn-icon mt-lg-0 mt-md-0 mt-3" title="Thêm Dịch Vụ mới">
                             <i class="btn-inner">
@@ -72,6 +72,65 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Xác Nhận</h4>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="datatable" class="table table-striped" data-toggle="data-table">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tên</th>
+                                    <th>Giá</th>
+                                    <th>Trạng Thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($houseServices as $houseService)
+                                    <tr>
+                                        <td>{{ $houseService->house_service_id }}</td>
+                                        <td>{{ $houseService->service_name }}</td>
+                                        <td>{{ number_format($service->price, 0, ',', '.') }} VNĐ</td>
+                                        <td>
+                                            <span class="badge {{ $houseService->status == '1' ? 'bg-success' : 'bg-danger' }}">
+                                            {{ $houseService->status == '1' ? 'Xác Nhận' : 'Chờ Xác Nhận' }}
+                                            </span>
+                                        </td>
+
+
+                                        <td class="d-flex align-items-center">
+
+
+                                            <form action="{{ route('service.status', $houseService->house_service_id) }}" method="POST" >
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-success update-status-btn"
+                                                    {{ $houseService->status == 1 ? 'disabled' : '' }}
+                                                >
+                                                    {{ $houseService->status == 1 ? 'Đã Xác Nhận' : 'Xác Nhận' }}
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 

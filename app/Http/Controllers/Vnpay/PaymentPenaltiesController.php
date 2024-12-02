@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Vnpay;
 use App\Http\Controllers\Controller;
 use App\Models\ElectricityBill;
 use App\Models\HouseBill;
+use App\Models\Payment;
 use App\Models\Penalty;
 use App\Models\WaterBill;
 use App\VNPay\VNPay;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class PaymentPenaltiesController extends Controller
@@ -84,7 +86,13 @@ class PaymentPenaltiesController extends Controller
                 session()->forget('transaction_id');
                 session()->forget($transactionId . '_penalties_bill_ids');
 
-
+                Payment::create([
+                    'name' => Auth::user()->name,
+                    'amount' => $penalty->amount,
+                    'note' => "Phạt",
+                    'payment_date' => now(),
+                    'is_delete' => 0,
+                ]);
                 return redirect()->route('penalty.filter')->with('success', 'thành công.');
             } else {
                 return response()->json(['message' => 'Giao dịch không hợp lệ!'], 400);

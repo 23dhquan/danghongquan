@@ -14,10 +14,6 @@ class HouseController extends Controller
 {
     public function index()
     {
-
-
-
-
         $curentArea = auth()->user();
         if($curentArea->is_super_admin ===1) {
             $houses = House::all();
@@ -51,7 +47,6 @@ class HouseController extends Controller
             'description' => 'required|string|max:255',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048' // Validate ảnh
         ]);
-
         // Tạo mới phòng thuê
         $house = House::create([
             'name' => $request->name,
@@ -59,7 +54,6 @@ class HouseController extends Controller
             'area_id' => $request->area_id,
             'description' => $request->description
         ]);
-
         // Xử lý và lưu ảnh vào bảng house_images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {

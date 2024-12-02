@@ -31,7 +31,7 @@ if (document.querySelectorAll('#myChart').length) {
     document.addEventListener('ColorChange', (e) => {
         const newOpt = {colors: [e.detail.detail2, e.detail.detail1],}
         chart.updateOptions(newOpt)
-       
+
     })
   }
 }
@@ -105,7 +105,7 @@ if (document.querySelectorAll('#d-activity').length) {
         }
       }
     };
-  
+
     const chart = new ApexCharts(document.querySelector("#d-activity"), options);
     chart.render();
     document.addEventListener('ColorChange', (e) => {
@@ -239,13 +239,13 @@ if ($('.d-slider1').length > 0) {
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev'
-        },  
+        },
 
         // And if we need scrollbar
         scrollbar: {
-            el: '.swiper-scrollbar'  
+            el: '.swiper-scrollbar'
         }
-    } 
+    }
     let swiper = new Swiper('.d-slider1',options);
 
     document.addEventListener('ChangeMode', (e) => {

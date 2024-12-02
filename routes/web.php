@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AreaController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\DasboardController;
 use App\Http\Controllers\Admin\DepositController;
 use App\Http\Controllers\Admin\HouseController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PenaltyController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\TenantController;
@@ -11,37 +14,54 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BillController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\User\BillUserController;
+use App\Http\Controllers\User\HistoryBillController;
+use App\Http\Controllers\User\HouseHomeController;
+use App\Http\Controllers\User\ServiceBillController;
 use App\Http\Controllers\Vnpay\PaymentBillController;
 use App\Http\Controllers\Vnpay\PaymentPenaltiesController;
+use App\Http\Controllers\Vnpay\PaymentServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/login', function () {
+    return redirect()->route('login');
+});
+
 Route::get('/auth/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/auth/login', [LoginController::class, 'login']);
 Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/about1', function () {
-    return view('test2');
-})->name('huy');
+Route::get('/', [HouseHomeController::class, 'index'])->name('home.index');
+Route::get('/house', [HouseHomeController::class, 'house'])->name('home.house');
+Route::get('/contact', [HouseHomeController::class, 'contact'])->name('home.contact');
+Route::post('/contact', [HouseHomeController::class, 'storeContact'])->name('contact.store');
+Route::get('/about',function () {return view('about');})->name('home.about');
+Route::get('/house-detail/{house_id}', [HouseHomeController::class, 'show'])->name('home.show');
 
-Route::get('/about', function () {
-    return view('test1');
-})->name('done');
+
+
 
 Route::group(['middleware' => 'tenant'], function () {
     Route::get('/hoa-don', [BillUserController::class, 'index'])->name('bill.filter');
-    Route::get('/penalties', [BillUserController::class, 'showPenalties'])->name('penalty.filter');
+    Route::get('/phieu-phat', [BillUserController::class, 'showPenalties'])->name('penalty.filter');
     Route::post('/vnpay/pay', [PaymentBillController::class, 'pay'])->name('vnpay.pay');
+    Route::get('/vnpay/return', [PaymentBillController::class, 'return'])->name('vnpay.return');
     Route::post('/vnpay/pay/penalties', [PaymentPenaltiesController::class, 'payPenaltis'])->name('vnpay.pay.penalties');
     Route::get('/vnpay/return/penalties', [PaymentPenaltiesController::class, 'returnPenaltis'])->name('vnpay.return.penalties');
 
-    Route::get('/vnpay/return', [PaymentBillController::class, 'return'])->name('vnpay.return');
+    Route::get('/dich-vu', [ServiceBillController::class, 'index'])->name('services.index');
+    Route::post('/services/register', [ServiceBillController::class, 'register'])->name('register.service');
+    Route::post('/vnpay/pay/service', [PaymentServiceController::class, 'payService'])->name('vnpay.pay.service');
+    Route::get('/vnpay/return/service', [PaymentServiceController::class, 'returnService'])->name('vnpay.return.service');
+    Route::get('/payment-us', [HistoryBillController::class, 'index'])->name('payment.list.user');
 
 });
 Route::group(['middleware' => 'admin'], function () {
 
 
-    Route::get('/',function () {return view('admin.dashboard');})->name('dashboard');
+    //Route::get('/dashboard',function () {return view('admin.dashboard');})->name('dashboard');
+
+    Route::get('/dashboard', [DasboardController::class, 'index'])->name('dashboard');
 
   //Area
 
@@ -89,6 +109,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/edit-service/{id}', [ServicesController::class, 'edit'])->name('service.edit');
     Route::put('/edit-service/{id}', [ServicesController::class, 'update'])->name('service.update');
     Route::delete('/delete-service/{id}', [ServicesController::class, 'destroy'])->name('service.destroy');
+    Route::delete('/status-service/{id}', [ServicesController::class, 'updateStatus'])->name('service.status');
+
 
     //Penal
    Route::get('/penalty-list',[PenaltyController::class, 'index'])->name('penalty.list');
@@ -115,4 +137,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/bills-list',[BillController::class, 'bill'])->name('bill.list');
     Route::post('/bill/update-status', [BillController::class, 'updateStatus'])->name('bill.updateStatus');
 
+    //contact us
+    Route::get('/contact-list',[ContactController::class, 'index'])->name('contact.list');
+    //Payment
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment.list');
 });

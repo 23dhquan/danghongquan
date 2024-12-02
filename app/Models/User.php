@@ -16,6 +16,8 @@ class User extends Authenticatable
         'email',        // Email người dùng (để đăng nhập)
         'password',     // Mật khẩu
         'note',
+        'phone',
+
         'role',
         'avatar',
         'status',// Quyền người dùng: 'admin' hoặc 'tenant'
@@ -26,7 +28,7 @@ class User extends Authenticatable
     // Các quan hệ
     public function area()
     {
-        return $this->belongsTo(Area::class); // Một người dùng có thể thuộc về 1 khu vực
+        return $this->belongsTo(Area::class);
     }
 
     public function tenant()

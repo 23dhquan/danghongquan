@@ -47,7 +47,7 @@
                                         <td class="d-flex align-items-center">
                                             <form action="{{ route('penalty.updateStatus', $penalty->penalty_id) }}" method="POST" class="update-status-form">
                                                 @csrf
-                                                @method('POST') <!-- Hoặc POST tùy theo cấu trúc API của bạn -->
+                                                @method('POST')
                                                 <button type="submit" class="btn btn-sm {{ $penalty->status == 1 ? 'btn-success' : 'btn-danger' }} update-status-btn"
                                                         {{ $penalty->status == 1 ? 'disabled' : '' }}
                                                         data-id="{{ $penalty->penalty_id }}">

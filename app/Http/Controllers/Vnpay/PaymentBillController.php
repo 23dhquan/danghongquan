@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Vnpay;
 use App\Http\Controllers\Controller;
 use App\Models\ElectricityBill;
 use App\Models\HouseBill;
+use App\Models\Payment;
 use App\Models\WaterBill;
 use App\VNPay\VNPay;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class PaymentBillController extends Controller
@@ -62,7 +64,7 @@ class PaymentBillController extends Controller
 
         $hashData = $vnpay->createHashData($data);
         $isValid = $vnpay->verifySecureHash($receivedHash, $hashData);
-
+        $totalAmount = 0;
         if ($isValid) {
             $transactionId = session('transaction_id');
 
@@ -75,6 +77,7 @@ class PaymentBillController extends Controller
                     if ($waterBill && $waterBill->status == 0) {
                         $waterBill->status = 1;
                         $waterBill->save();
+                        $totalAmount += $waterBill->amount;
                     }
                 }
 
@@ -83,6 +86,7 @@ class PaymentBillController extends Controller
                     if ($electricityBill && $electricityBill->status == 0) {
                         $electricityBill->status = 1;
                         $electricityBill->save();
+                        $totalAmount += $electricityBill->amount;
                     }
                 }
 
@@ -91,13 +95,20 @@ class PaymentBillController extends Controller
                     if ($house) {
                         $house->status = 1;
                         $house->save();
+                        $totalAmount += $house->amount;
                     }
                 }
+                Payment::create([
+                    'name' => Auth::user()->name,
+                    'amount' => $totalAmount,
+                    'note' => "Điện nước nhà",
+                    'payment_date' => now(),
+                    'is_delete' => 0,
+                ]);
                 session()->forget('transaction_id');
                 session()->forget($transactionId . '_house_bill_id');
                 session()->forget($transactionId . '_water_bill_id');
                 session()->forget($transactionId . '_electricity_bill_id');
-//                return response()->json(['message' => 'Giao dịch thành công!']);
                 return redirect()->route('bill.filter')->with('success', 'thành công.');
             } else {
                 return response()->json(['message' => 'Giao dịch không hợp lệ!'], 400);

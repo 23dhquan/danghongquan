@@ -28,7 +28,8 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Mô Tả</label>
-                                        <input type="text" class="form-control" id="description" name="description" value="{{ $house->description }}" required>
+
+                                        <textarea type="text" class="form-control" id="description" name="description" required> {{ $house->description }}</textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="area_id" class="form-label">Chọn Khu Vực</label>

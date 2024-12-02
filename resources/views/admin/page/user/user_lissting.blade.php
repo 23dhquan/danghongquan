@@ -102,8 +102,23 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
         <script>
+            $(document).ready(function () {
+                if ($.fn.DataTable) {
+                    const tableSelector = $('[data-toggle="data-table"]'); // Lưu selector vào biến
+                    if (tableSelector.length) {
+                        const table = tableSelector.DataTable({
+                            paging: true, // Bật phân trang
+                            searching: true, // Bật tìm kiếm
+                            ordering: true, // Bật sắp xếp
+                            dom: '<"row align-items-center"<"col-md-6" l><"col-md-6" f>><"table-responsive border-bottom my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">',
+                        });
+                    }
+                }
+            });
+        </script>
+        <script>
+
             document.querySelectorAll('.delete-form').forEach(form => {
                 form.addEventListener('submit', function(e) {
                     e.preventDefault(); // Ngăn chặn việc gửi form ngay lập tức

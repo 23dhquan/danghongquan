@@ -28,6 +28,10 @@
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                             <div class="mb-3">
+                                <label for="name" class="form-label">Số Điện Thoại</label>
+                                <input type="text" class="form-control" id="phone" name="phone" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="address" class="form-label">Địa Chỉ Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
@@ -46,7 +50,7 @@
                             <div class="form-group">
                                 <label for="role">Vai Trò</label>
                                 <select name="role" id="role" class="form-control">
-                                    @if(auth()->check() && auth()->user()->role === 'admin' && auth()->user()->area_id === 0)
+                                    @if(auth()->check() && auth()->user()->role === 'admin' && auth()->user()->is_supper_admin ===1)
                                         <!-- Nếu người dùng là admin và area_id = 0, hiển thị cả hai tùy chọn -->
                                         <option value="tenant">Tenant</option>
                                         <option value="admin">Admin</option>

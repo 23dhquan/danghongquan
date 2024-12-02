@@ -30,10 +30,6 @@ class Tenant extends Model
         return $this->belongsTo(House::class, 'house_id'); // Đảm bảo 'house_id' là tên cột đúng trong bảng tenants
     }
 
-    public function parkingCards()
-    {
-        return $this->hasMany(ParkingCard::class); // Một người thuê có nhiều thẻ gửi xe
-    }
 
     public function payments()
     {

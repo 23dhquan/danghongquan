@@ -9,16 +9,15 @@ class Payment extends Model
 {
     use HasFactory;
     public  $primaryKey = 'payment_id';
+    public $timestamps = false;
     protected $fillable = [
-        'tenant_id',      // Mã người thuê (foreign key từ bảng tenants)
-        'amount',         // Số tiền thanh toán
-        'payment_date',   // Ngày thanh toán
-        'description'     // Mô tả chi tiết thanh toán
+        'name',
+        'amount',
+        'note',
+        'payment_date',
+        'is_delete'
     ];
 
-    // Quan hệ
-    public function tenant()
-    {
-        return $this->belongsTo(Tenant::class); // Một khoản thanh toán thuộc về 1 người thuê
-    }
+
+
 }

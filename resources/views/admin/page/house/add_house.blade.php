@@ -25,9 +25,13 @@
                                         <label for="price" class="form-label">Giá Tiền</label>
                                         <input type="text" class="form-control" id="price" name="price" required>
                                     </div>
+{{--                                    <div class="mb-3">--}}
+{{--                                        <label for="description" class="form-label">Mô Tả</label>--}}
+{{--                                        <textarea class="form-control"   id="description" name="description" required></textarea>--}}
+{{--                                    </div>--}}
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Mô Tả</label>
-                                        <input type="text" class="form-control" id="description" name="description" required>
+                                        <textarea class="form-control"     name="description" required></textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="area_id" class="form-label">Chọn Khu Vực</label>
@@ -58,6 +62,13 @@
             </div>
         </div>
     </div>
+{{--    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>--}}
+
+{{--    <!-- Kích hoạt CKEditor -->--}}
+{{--    <script>--}}
+{{--        CKEDITOR.replace('description');--}}
+{{--    </script>--}}
+
 
     <script>
         // Xử lý xem trước ảnh được chọn

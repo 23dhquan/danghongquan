@@ -17,8 +17,8 @@
                                             </svg>
                                         </div>
                                         <div class="progress-detail">
-                                            <p  class="mb-2">Total Sales</p>
-                                            <h4 class="counter">$560K</h4>
+                                            <p  class="mb-2">Tổng Tiền Nước</p>
+                                            <h4 class="counter">{{ number_format($yearlyTotals['water'], 0) }} </h4>
                                         </div>
                                     </div>
                                 </div>
@@ -32,8 +32,8 @@
                                             </svg>
                                         </div>
                                         <div class="progress-detail">
-                                            <p  class="mb-2">Total Profit</p>
-                                            <h4 class="counter">$185K</h4>
+                                            <p  class="mb-2">Tổng Tiền Điện</p>
+                                            <h4 class="counter">{{ number_format($yearlyTotals['electricity'], 0) }}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -47,8 +47,8 @@
                                             </svg>
                                         </div>
                                         <div class="progress-detail">
-                                            <p  class="mb-2">Total Cost</p>
-                                            <h4 class="counter">$375K</h4>
+                                            <p  class="mb-2">Tổng Tiền Nhà</p>
+                                            <h4 class="counter">{{ number_format($yearlyTotals['house_bill'], 0) }}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -62,352 +62,41 @@
                                             </svg>
                                         </div>
                                         <div class="progress-detail">
-                                            <p  class="mb-2">Revenue</p>
-                                            <h4 class="counter">$742K</h4>
+                                            <p  class="mb-2">Tổng Tiền DV</p>
+                                            <h4 class="counter">{{ number_format($totalPrice)}}</h4>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1100">
-                                <div class="card-body">
-                                    <div class="progress-widget">
-                                        <div id="circle-progress-05" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="50" data-type="percent">
-                                            <svg class="card-slie-arrow icon-24" width="24px"  viewBox="0 0 24 24">
-                                                <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                                            </svg>
-                                        </div>
-                                        <div class="progress-detail">
-                                            <p  class="mb-2">Net Income</p>
-                                            <h4 class="counter">$150K</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1200">
-                                <div class="card-body">
-                                    <div class="progress-widget">
-                                        <div id="circle-progress-06" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="40" data-type="percent">
-                                            <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
-                                                <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
-                                            </svg>
-                                        </div>
-                                        <div class="progress-detail">
-                                            <p  class="mb-2">Today</p>
-                                            <h4 class="counter">$4600</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1300">
-                                <div class="card-body">
-                                    <div class="progress-widget">
-                                        <div id="circle-progress-07" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="30" data-type="percent">
-                                            <svg class="card-slie-arrow icon-24 " width="24" viewBox="0 0 24 24">
-                                                <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
-                                            </svg>
-                                        </div>
-                                        <div class="progress-detail">
-                                            <p  class="mb-2">Members</p>
-                                            <h4 class="counter">11.2M</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+
                         </ul>
-                        <div class="swiper-button swiper-button-next"></div>
-                        <div class="swiper-button swiper-button-prev"></div>
+{{--                        <div class="swiper-button swiper-button-next"></div>--}}
+{{--                        <div class="swiper-button swiper-button-prev"></div>--}}
                     </div>
                 </div>
             </div>
             <div class="col-md-12 col-lg-8">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="card" data-aos="fade-up" data-aos-delay="800">
-                            <div class="flex-wrap card-header d-flex justify-content-between align-items-center">
-                                <div class="header-title">
-                                    <h4 class="card-title">$855.8K</h4>
-                                    <p class="mb-0">Gross Sales</p>
-                                </div>
-                                <div class="d-flex align-items-center align-self-center">
-                                    <div class="d-flex align-items-center text-primary">
-                                        <svg class="icon-12" xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24" fill="currentColor">
-                                            <g>
-                                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                            </g>
-                                        </svg>
-                                        <div class="ms-2">
-                                            <span class="text-gray">Sales</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center ms-3 text-info">
-                                        <svg class="icon-12" xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24" fill="currentColor">
-                                            <g>
-                                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                            </g>
-                                        </svg>
-                                        <div class="ms-2">
-                                            <span class="text-gray">Cost</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                    <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton22" data-bs-toggle="dropdown" aria-expanded="false">
-                                        This Week
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton22">
-                                        <li><a class="dropdown-item" href="#">This Week</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div id="d-main" class="d-main"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-xl-6">
+                    <div class="col-md-12 ">
                         <div class="card" data-aos="fade-up" data-aos-delay="900">
-                            <div class="flex-wrap card-header d-flex justify-content-between">
-                                <div class="header-title">
-                                    <h4 class="card-title">Earnings</h4>
-                                </div>
-                                <div class="dropdown">
-                                    <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        This Week
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#">This Week</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="flex-wrap d-flex align-items-center justify-content-between">
-                                    <div id="myChart" class="col-md-8 col-lg-8 myChart"></div>
-                                    <div class="d-grid gap col-md-4 col-lg-4">
-                                        <div class="d-flex align-items-start">
-                                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#3a57e8">
-                                                <g>
-                                                    <circle cx="12" cy="12" r="8" fill="#3a57e8"></circle>
-                                                </g>
-                                            </svg>
-                                            <div class="ms-3">
-                                                <span class="text-gray">Fashion</span>
-                                                <h6>251K</h6>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-start">
-                                            <svg class="mt-2 icon-14" xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24" fill="#4bc7d2">
-                                                <g>
-                                                    <circle cx="12" cy="12" r="8" fill="#4bc7d2"></circle>
-                                                </g>
-                                            </svg>
-                                            <div class="ms-3">
-                                                <span class="text-gray">Accessories</span>
-                                                <h6>176K</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <form action="{{ route('dashboard') }}" method="GET" id="yearForm" class=" mt-2 ms-2">
+                                <label for="year">Chọn năm:</label>
+                                <select  id="year" name="year" onchange="this.form.submit()">
+                                    <option class="form-select" value="" disabled selected>Chọn năm</option> <!-- Mặc định không có năm nào được chọn -->
+                                    @for ($i = 2022; $i <= \Carbon\Carbon::now()->year; $i++)
+                                        <option  value="{{ $i }}" {{ request('year') == $i ? 'selected' : '' }}>
+                                            {{ $i }}
+                                        </option>
+                                    @endfor
+                                </select>
+
+                            </form>
+                            <div id="monthlyAmountChart"></div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-xl-6">
-                        <div class="card" data-aos="fade-up" data-aos-delay="1000">
-                            <div class="flex-wrap card-header d-flex justify-content-between">
-                                <div class="header-title">
-                                    <h4 class="card-title">Conversions</h4>
-                                </div>
-                                <div class="dropdown">
-                                    <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
-                                        This Week
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton3">
-                                        <li><a class="dropdown-item" href="#">This Week</a></li>
-                                        <li><a class="dropdown-item" href="#">This Month</a></li>
-                                        <li><a class="dropdown-item" href="#">This Year</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div id="d-activity" class="d-activity"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-12">
-                        <div class="overflow-hidden card" data-aos="fade-up" data-aos-delay="600">
-                            <div class="flex-wrap card-header d-flex justify-content-between">
-                                <div class="header-title">
-                                    <h4 class="mb-2 card-title">Enterprise Clients</h4>
-                                    <p class="mb-0">
-                                        <svg class ="me-2 text-primary icon-24" width="24"  viewBox="0 0 24 24">
-                                            <path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
-                                        </svg>
-                                        15 new acquired this month
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="p-0 card-body">
-                                <div class="mt-4 table-responsive">
-                                    <table id="basic-table" class="table mb-0 table-striped" role="grid">
-                                        <thead>
-                                        <tr>
-                                            <th>COMPANIES</th>
-                                            <th>CONTACTS</th>
-                                            <th>ORDER</th>
-                                            <th>COMPLETION</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img class="rounded bg-soft-primary img-fluid avatar-40 me-3" src="../assets/images/shapes/01.png" alt="profile">
-                                                    <h6>Addidis Sportwear</h6>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="iq-media-group iq-media-group-1">
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                                    </a>
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                                    </a>
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>$14,000</td>
-                                            <td>
-                                                <div class="mb-2 d-flex align-items-center">
-                                                    <h6>60%</h6>
-                                                </div>
-                                                <div class="shadow-none progress bg-soft-primary w-100" style="height: 4px">
-                                                    <div class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img class="rounded bg-soft-primary img-fluid avatar-40 me-3" src="../assets/images/shapes/05.png" alt="profile">
-                                                    <h6>Netflixer Platforms</h6>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="iq-media-group iq-media-group-1">
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                                    </a>
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>$30,000</td>
-                                            <td>
-                                                <div class="mb-2 d-flex align-items-center">
-                                                    <h6>25%</h6>
-                                                </div>
-                                                <div class="shadow-none progress bg-soft-primary w-100" style="height: 4px">
-                                                    <div class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img class="rounded bg-soft-primary img-fluid avatar-40 me-3" src="../assets/images/shapes/02.png" alt="profile">
-                                                    <h6>Shopifi Stores</h6>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="iq-media-group iq-media-group-1">
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                                    </a>
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">TP</div>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>$8,500</td>
-                                            <td>
-                                                <div class="mb-2 d-flex align-items-center">
-                                                    <h6>100%</h6>
-                                                </div>
-                                                <div class="shadow-none progress bg-soft-success w-100" style="height: 4px">
-                                                    <div class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img class="rounded bg-soft-primary img-fluid avatar-40 me-3" src="../assets/images/shapes/03.png" alt="profile">
-                                                    <h6>Bootstrap Technologies</h6>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="iq-media-group iq-media-group-1">
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                                    </a>
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                                    </a>
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                                    </a>
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">TP</div>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>$20,500</td>
-                                            <td>
-                                                <div class="mb-2 d-flex align-items-center">
-                                                    <h6>100%</h6>
-                                                </div>
-                                                <div class="shadow-none progress bg-soft-success w-100" style="height: 4px">
-                                                    <div class="progress-bar bg-success" data-toggle="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img class="rounded bg-soft-primary img-fluid avatar-40 me-3" src="../assets/images/shapes/04.png" alt="profile">
-                                                    <h6>Community First</h6>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="iq-media-group iq-media-group-1">
-                                                    <a href="#" class="iq-media-1">
-                                                        <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>$9,800</td>
-                                            <td>
-                                                <div class="mb-2 d-flex align-items-center">
-                                                    <h6>75%</h6>
-                                                </div>
-                                                <div class="shadow-none progress bg-soft-primary w-100" style="height: 4px">
-                                                    <div class="progress-bar bg-primary" data-toggle="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+
+
                 </div>
             </div>
             <div class="col-md-12 col-lg-4">
@@ -453,43 +142,35 @@
                                     <div class="d-flex align-itmes-center me-0 me-md-4">
                                         <div>
                                             <div class="p-3 mb-2 rounded bg-soft-primary">
-                                                <svg class="icon-20"  width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.9303 7C16.9621 6.92913 16.977 6.85189 16.9739 6.77432H17C16.8882 4.10591 14.6849 2 12.0049 2C9.325 2 7.12172 4.10591 7.00989 6.77432C6.9967 6.84898 6.9967 6.92535 7.00989 7H6.93171C5.65022 7 4.28034 7.84597 3.88264 10.1201L3.1049 16.3147C2.46858 20.8629 4.81062 22 7.86853 22H16.1585C19.2075 22 21.4789 20.3535 20.9133 16.3147L20.1444 10.1201C19.676 7.90964 18.3503 7 17.0865 7H16.9303ZM15.4932 7C15.4654 6.92794 15.4506 6.85153 15.4497 6.77432C15.4497 4.85682 13.8899 3.30238 11.9657 3.30238C10.0416 3.30238 8.48184 4.85682 8.48184 6.77432C8.49502 6.84898 8.49502 6.92535 8.48184 7H15.4932ZM9.097 12.1486C8.60889 12.1486 8.21321 11.7413 8.21321 11.2389C8.21321 10.7366 8.60889 10.3293 9.097 10.3293C9.5851 10.3293 9.98079 10.7366 9.98079 11.2389C9.98079 11.7413 9.5851 12.1486 9.097 12.1486ZM14.002 11.2389C14.002 11.7413 14.3977 12.1486 14.8858 12.1486C15.3739 12.1486 15.7696 11.7413 15.7696 11.2389C15.7696 10.7366 15.3739 10.3293 14.8858 10.3293C14.3977 10.3293 14.002 10.7366 14.002 11.2389Z" fill="currentColor"></path>
-                                                </svg>
+                                                <svg style="width: 20px; height: 20px" class="icon-32" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                                    <path d="M17.8877 10.8967C19.2827 10.7007 20.3567 9.50473 20.3597 8.05573C20.3597 6.62773 19.3187 5.44373 17.9537 5.21973" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path d="M19.7285 14.2505C21.0795 14.4525 22.0225 14.9255 22.0225 15.9005C22.0225 16.5715 21.5785 17.0075 20.8605 17.2815" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8867 14.6638C8.67273 14.6638 5.92773 15.1508 5.92773 17.0958C5.92773 19.0398 8.65573 19.5408 11.8867 19.5408C15.1007 19.5408 17.8447 19.0588 17.8447 17.1128C17.8447 15.1668 15.1177 14.6638 11.8867 14.6638Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.8869 11.888C13.9959 11.888 15.7059 10.179 15.7059 8.069C15.7059 5.96 13.9959 4.25 11.8869 4.25C9.7779 4.25 8.0679 5.96 8.0679 8.069C8.0599 10.171 9.7569 11.881 11.8589 11.888H11.8869Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path d="M5.88509 10.8967C4.48909 10.7007 3.41609 9.50473 3.41309 8.05573C3.41309 6.62773 4.45409 5.44373 5.81909 5.21973" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                    <path d="M4.044 14.2505C2.693 14.4525 1.75 14.9255 1.75 15.9005C1.75 16.5715 2.194 17.0075 2.912 17.2815" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                </svg>
                                             </div>
                                         </div>
                                         <div class="ms-3">
-                                            <h5>1153</h5>
-                                            <small class="mb-0">Products</small>
+                                            <h5>{{$toltalTenant}}</h5>
+                                            <small class="mb-0">Khách Hàng</small>
                                         </div>
                                     </div>
                                     <div class="d-flex align-itmes-center">
                                         <div>
                                             <div class="p-3 mb-2 rounded bg-soft-info">
-                                                <svg class="icon-20" width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.1213 11.2331H16.8891C17.3088 11.2331 17.6386 10.8861 17.6386 10.4677C17.6386 10.0391 17.3088 9.70236 16.8891 9.70236H14.1213C13.7016 9.70236 13.3719 10.0391 13.3719 10.4677C13.3719 10.8861 13.7016 11.2331 14.1213 11.2331ZM20.1766 5.92749C20.7861 5.92749 21.1858 6.1418 21.5855 6.61123C21.9852 7.08067 22.0551 7.7542 21.9652 8.36549L21.0159 15.06C20.8361 16.3469 19.7569 17.2949 18.4879 17.2949H7.58639C6.25742 17.2949 5.15828 16.255 5.04837 14.908L4.12908 3.7834L2.62026 3.51807C2.22057 3.44664 1.94079 3.04864 2.01073 2.64043C2.08068 2.22305 2.47038 1.94649 2.88006 2.00874L5.2632 2.3751C5.60293 2.43735 5.85274 2.72207 5.88272 3.06905L6.07257 5.35499C6.10254 5.68257 6.36234 5.92749 6.68209 5.92749H20.1766ZM7.42631 18.9079C6.58697 18.9079 5.9075 19.6018 5.9075 20.459C5.9075 21.3061 6.58697 22 7.42631 22C8.25567 22 8.93514 21.3061 8.93514 20.459C8.93514 19.6018 8.25567 18.9079 7.42631 18.9079ZM18.6676 18.9079C17.8282 18.9079 17.1487 19.6018 17.1487 20.459C17.1487 21.3061 17.8282 22 18.6676 22C19.4969 22 20.1764 21.3061 20.1764 20.459C20.1764 19.6018 19.4969 18.9079 18.6676 18.9079Z" fill="currentColor"></path>
-                                                </svg>
+                                                <svg style="width: 20px; height: 20px" class="icon-32" width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                                    <path d="M9.15722 20.7714V17.7047C9.1572 16.9246 9.79312 16.2908 10.581 16.2856H13.4671C14.2587 16.2856 14.9005 16.9209 14.9005 17.7047V17.7047V20.7809C14.9003 21.4432 15.4343 21.9845 16.103 22H18.0271C19.9451 22 21.5 20.4607 21.5 18.5618V18.5618V9.83784C21.4898 9.09083 21.1355 8.38935 20.538 7.93303L13.9577 2.6853C12.8049 1.77157 11.1662 1.77157 10.0134 2.6853L3.46203 7.94256C2.86226 8.39702 2.50739 9.09967 2.5 9.84736V18.5618C2.5 20.4607 4.05488 22 5.97291 22H7.89696C8.58235 22 9.13797 21.4499 9.13797 20.7714V20.7714" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>                                </svg>
                                             </div>
                                         </div>
                                         <div class="ms-3">
-                                            <h5>81K</h5>
-                                            <small class="mb-0">Order Served</small>
+                                            <h5>{{$toltalHouse}}</h5>
+                                            <small class="mb-0">Phòng Thuê</small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="flex-wrap d-flex justify-content-between">
-                                        <h2 class="mb-2">$405,012,300</h2>
-                                        <div>
-                                            <span class="badge bg-success rounded-pill">YoY 24%</span>
-                                        </div>
+                                        <h3  class="mb-4 mt-2">Tổng Danh Thu</h3>
+                                        <h2 class="mb-2">{{ number_format($totalAmountAll)}} VNĐ</h2>
+
                                     </div>
-                                    <p class="text-info">Life time sales</p>
+
                                 </div>
-                                <div class="grid-cols-2 d-grid gap-card">
-                                    <button class="p-2 btn btn-primary text-uppercase">SUMMARY</button>
-                                    <button class="p-2 btn btn-info text-uppercase">ANALYTICS</button>
-                                </div>
+
                             </div>
                         </div>
                         <div class="card" data-aos="fade-up" data-aos-delay="500">
@@ -506,60 +187,58 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-12">
-                        <div class="card" data-aos="fade-up" data-aos-delay="600">
-                            <div class="flex-wrap card-header d-flex justify-content-between">
-                                <div class="header-title">
-                                    <h4 class="mb-2 card-title">Activity overview</h4>
-                                    <p class="mb-0">
-                                        <svg class ="me-2 icon-24" width="24" height="24" viewBox="0 0 24 24">
-                                            <path fill="#17904b" d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z" />
-                                        </svg>
-                                        16% this month
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-2  d-flex profile-media align-items-top">
-                                    <div class="mt-1 profile-dots-pills border-primary"></div>
-                                    <div class="ms-4">
-                                        <h6 class="mb-1 ">$2400, Purchase</h6>
-                                        <span class="mb-0">11 JUL 8:10 PM</span>
-                                    </div>
-                                </div>
-                                <div class="mb-2  d-flex profile-media align-items-top">
-                                    <div class="mt-1 profile-dots-pills border-primary"></div>
-                                    <div class="ms-4">
-                                        <h6 class="mb-1 ">New order #8744152</h6>
-                                        <span class="mb-0">11 JUL 11 PM</span>
-                                    </div>
-                                </div>
-                                <div class="mb-2  d-flex profile-media align-items-top">
-                                    <div class="mt-1 profile-dots-pills border-primary"></div>
-                                    <div class="ms-4">
-                                        <h6 class="mb-1 ">Affiliate Payout</h6>
-                                        <span class="mb-0">11 JUL 7:64 PM</span>
-                                    </div>
-                                </div>
-                                <div class="mb-2  d-flex profile-media align-items-top">
-                                    <div class="mt-1 profile-dots-pills border-primary"></div>
-                                    <div class="ms-4">
-                                        <h6 class="mb-1 ">New user added</h6>
-                                        <span class="mb-0">11 JUL 1:21 AM</span>
-                                    </div>
-                                </div>
-                                <div class="mb-1  d-flex profile-media align-items-top">
-                                    <div class="mt-1 profile-dots-pills border-primary"></div>
-                                    <div class="ms-4">
-                                        <h6 class="mb-1 ">Product added</h6>
-                                        <span class="mb-0">11 JUL 4:50 AM</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+        var options = {
+            chart: {
+                type: 'bar', // Loại biểu đồ là bar (cột)
+                height: 660
+            },
+            series: [{
+                name: 'Tổng tiền',
+                data: [
+                    @for($i = 1; $i <= 12; $i++)
+                        {{ $monthlyTotals[$i] ?? 0 }},
+                    @endfor
+                ]
+            }],
+            xaxis: {
+                categories: [
+                    'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                    'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'
+                ],
+            },
+            fill: {
+                opacity: 1,
+                colors: ['#008FFB'], // Màu sắc cột
+            },
+            dataLabels: {
+                enabled: false, // Tắt nhãn dữ liệu trên cột
+            },
+            title: {
+                text: 'Tổng tiền thanh toán theo từng tháng',
+                align: 'center',
+                style: {
+                    fontSize: '18px',
+                    fontWeight: 'bold'
+                }
+            },
+            tooltip: {
+                y: {
+                    formatter: function(value) {
+                        return value.toLocaleString() + ' VND'; // Định dạng tooltip hiển thị số tiền
+                    }
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#monthlyAmountChart"), options);
+        chart.render();
+    </script>
     @endsection

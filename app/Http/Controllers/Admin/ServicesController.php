@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\HouseService;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class ServicesController extends Controller
 {
     public function index(){
         $services = Service::all();
-        return view('admin.page.service.service_listting', compact('services'));
+        $houseServices = HouseService::all();
+        foreach($houseServices as $houseService){
+            $houseService->service_name = Service::find($houseService->service_id)->name;
+            Log::info($houseService);
+        }
+        return view('admin.page.service.service_listting', compact('services' , 'houseServices'));
     }
     public function create(){
         return view('admin.page.service.service_create');
@@ -56,6 +63,14 @@ class ServicesController extends Controller
         $service->delete();
         return redirect()->back()->with('success', 'Service deleted successfully');
     }
+    public function updateStatus($service_id)
+    {
+        $service = HouseService::find($service_id);
+        $service->status= 1;
+        $service->save();
+        return redirect()->back()->with('success', 'Service deleted successfully');
+    }
+
 
 
 }

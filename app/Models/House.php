@@ -11,27 +11,35 @@ class House extends Model
     public $primaryKey ='house_id';
     public $timestamps = false;
     protected $fillable = [
-        'name',         // Tên nhà trọ
-        'area_id',      // Mã khu vực liên kết (foreign key)
-        'price',        // Giá thuê nhà trọ
-        'description',    // Mô tả nhà trọ
+        'name',
+        'area_id',
+        'price',
+        'description',
         'is_rented',
 
     ];
 
     public function getAreaName()
     {
-        return Area::find($this->area_id)->name ?? 'N/A'; // Trả về 'N/A' nếu không tìm thấy
+        return Area::find($this->area_id)->name ?? 'N/A';
+    }
+    public function getAreaAddress()
+    {
+        return Area::find($this->area_id)->address ?? 'N/A';
     }
 
     // Quan hệ
     public function area()
     {
-        return $this->belongsTo(Area::class); // Một nhà trọ thuộc về 1 khu vực
+        return $this->belongsTo(Area::class);
     }
 
     public function tenants()
     {
-        return $this->hasMany(Tenant::class); // Một nhà trọ có nhiều người thuê
+        return $this->hasMany(Tenant::class);
+    }
+    public function images()
+    {
+        return $this->hasMany(HouseImage::class, 'house_id', 'house_id');
     }
 }

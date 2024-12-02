@@ -14,19 +14,15 @@ class UserController extends Controller
     public function index(){
         $currentUser = auth()->user();
 
-        // Kiểm tra area_id của người dùng đăng nhập
         if ($currentUser->is_super_admin === 1) {
-            // Nếu area_id là 0, lấy tất cả người dùng
             $user = User::all();
         } else {
-            // Nếu không, chỉ lấy người dùng cùng khu vực
             $user = User::where('area_id', $currentUser->area_id)->get();
         }
         return view('admin.page.user.user_lissting', compact('user'));
     }
     public function create()
     {
-//        $areas  = Area::all();
         $curentArea = auth()->user();
         if($curentArea->is_super_admin ===1) {
             $areas = Area::all();
@@ -45,6 +41,7 @@ class UserController extends Controller
             'note' => 'nullable|string|max:255',
             'role' => 'required|string|max:255',
             'area_id' => 'required|integer',
+            'phone' => 'required|string',
         ]);
 
         // Rút gọn phần tạo người dùng
@@ -55,6 +52,8 @@ class UserController extends Controller
             'note' => $request->note,
             'role' => $request->role,
             'area_id' => $request->area_id,
+            'phone' => $request->phone,
+
         ]);
 
         return redirect()->route('user.list')->with('success', 'User created successfully!');
@@ -88,6 +87,8 @@ class UserController extends Controller
             'note' => 'nullable|string|max:255',
             'role' => 'required|string|max:255',
             'area_id' => 'required|integer',
+            'phone' => 'required|string',
+
         ]);
 
         // Cập nhật thông tin người dùng
@@ -98,6 +99,8 @@ class UserController extends Controller
             'note' => $request->note,
             'role' => $request->role,
             'area_id' => $request->area_id,
+            'phone' => $request->phone,
+
         ]);
 
         return redirect()->route('user.list')->with('success', 'User updated successfully!');
