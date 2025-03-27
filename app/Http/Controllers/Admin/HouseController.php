@@ -45,24 +45,22 @@ class HouseController extends Controller
             'price' => 'required|integer',
             'area_id' => 'required|integer',
             'description' => 'required|string|max:255',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048' // Validate ảnh
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-        // Tạo mới phòng thuê
         $house = House::create([
             'name' => $request->name,
             'price' => $request->price,
             'area_id' => $request->area_id,
             'description' => $request->description
         ]);
-        // Xử lý và lưu ảnh vào bảng house_images
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $filename = time() . '_' . $image->getClientOriginalName(); // Tạo tên file duy nhất
-                $image->move(public_path('houses_image'), $filename); // Di chuyển file vào public/uploads/houses
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('houses_image'), $filename);
 
                 HouseImage::create([
                     'house_id' => $house->house_id,
-                    'image_path' => 'houses_image/' . $filename // Lưu đường dẫn tương đối vào database
+                    'image_path' => 'houses_image/' . $filename
                 ]);
             }
         }
@@ -81,7 +79,7 @@ class HouseController extends Controller
     public function edit($id)
     {
         $house = House::findOrFail($id);
-        $images = HouseImage::where('house_id', $id)->get(); // Lấy ảnh của phòng
+        $images = HouseImage::where('house_id', $id)->get();
         $curentArea = auth()->user();
         if($curentArea->is_super_admin ===1) {
             $areas = Area::all();
@@ -98,10 +96,9 @@ class HouseController extends Controller
             'price' => 'required|integer',
             'area_id' => 'required|integer',
             'description' => 'required|string|max:255',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048' // Validate ảnh
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        // Tìm phòng thuê
         $house = House::findOrFail($id);
         $house->update([
             'name' => $request->name,
@@ -110,26 +107,24 @@ class HouseController extends Controller
             'description' => $request->description
         ]);
 
-        // Xử lý ảnh mới
         if ($request->hasFile('images')) {
-            // Xóa ảnh cũ
             $oldImages = HouseImage::where('house_id', $house->house_id)->get();
             foreach ($oldImages as $oldImage) {
                 $oldImagePath = public_path($oldImage->image_path);
                 if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath); // Xóa file
+                    unlink($oldImagePath);
                 }
-                $oldImage->delete(); // Xóa record trong database
+                $oldImage->delete();
             }
 
             // Lưu ảnh mới
             foreach ($request->file('images') as $image) {
-                $filename = time() . '_' . $image->getClientOriginalName(); // Tạo tên file duy nhất
-                $image->move(public_path('houses_image'), $filename); // Di chuyển file vào public/houses_image
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('houses_image'), $filename);
 
                 HouseImage::create([
                     'house_id' => $house->house_id,
-                    'image_path' => 'houses_image/' . $filename // Lưu đường dẫn tương đối vào database
+                    'image_path' => 'houses_image/' . $filename
                 ]);
             }
         }
@@ -160,12 +155,11 @@ class HouseController extends Controller
 
         foreach ($houses as $house) {
             $isRented = Tenant::where('house_id', $house->house_id)
-                ->where('is_delete', 0) // Thêm điều kiện kiểm tra is_delete
-                ->exists(); // Kiểm tra tồn tại thuê
+                ->where('is_delete', 0)
+                ->exists();
 
-            $house->is_rented = $isRented ? 1 : 0; // Cập nhật giá trị is_rented
+            $house->is_rented = $isRented ? 1 : 0;
 
-            // Cập nhật trạng thái vào cơ sở dữ liệu
             $house->update(['is_rented' => $house->is_rented]);
         }
 

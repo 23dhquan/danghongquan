@@ -4,74 +4,74 @@
 @section('content')
     <div class="conatiner-fluid content-inner mt-n5 py-0">
         <div class="row">
-            <div class="col-md-12 col-lg-12">
-                <div class="row row-cols-1">
-                    <div class="overflow-hidden d-slider1 ">
-                        <ul  class="p-0 m-0 mb-2 swiper-wrapper list-inline">
-                            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
-                                <div class="card-body">
-                                    <div class="progress-widget">
-                                        <div id="circle-progress-01" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
-                                            <svg class="card-slie-arrow icon-24" width="24"  viewBox="0 0 24 24">
-                                                <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                                            </svg>
-                                        </div>
-                                        <div class="progress-detail">
-                                            <p  class="mb-2">Tổng Tiền Nước</p>
-                                            <h4 class="counter">{{ number_format($yearlyTotals['water'], 0) }} </h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="800">
-                                <div class="card-body">
-                                    <div class="progress-widget">
-                                        <div id="circle-progress-02" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="80" data-type="percent">
-                                            <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
-                                                <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
-                                            </svg>
-                                        </div>
-                                        <div class="progress-detail">
-                                            <p  class="mb-2">Tổng Tiền Điện</p>
-                                            <h4 class="counter">{{ number_format($yearlyTotals['electricity'], 0) }}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="900">
-                                <div class="card-body">
-                                    <div class="progress-widget">
-                                        <div id="circle-progress-03" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="70" data-type="percent">
-                                            <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
-                                                <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
-                                            </svg>
-                                        </div>
-                                        <div class="progress-detail">
-                                            <p  class="mb-2">Tổng Tiền Nhà</p>
-                                            <h4 class="counter">{{ number_format($yearlyTotals['house_bill'], 0) }}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
-                                <div class="card-body">
-                                    <div class="progress-widget">
-                                        <div id="circle-progress-04" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="60" data-type="percent">
-                                            <svg class="card-slie-arrow icon-24" width="24px"  viewBox="0 0 24 24">
-                                                <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                                            </svg>
-                                        </div>
-                                        <div class="progress-detail">
-                                            <p  class="mb-2">Tổng Tiền DV</p>
-                                            <h4 class="counter">{{ number_format($totalPrice)}}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
 
-                        </ul>
-{{--                        <div class="swiper-button swiper-button-next"></div>--}}
-{{--                        <div class="swiper-button swiper-button-prev"></div>--}}
+            <div class="row">
+                <div class="col-md-12 col-lg-3">
+                    <div  class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
+                        <div  class="card-body">
+                            <div  class="progress-widget">
+                                <div  id="circle-progress-01" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="90" data-type="percent">
+                                    <svg class="card-slie-arrow icon-24" width="24"  viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
+                                    </svg>
+                                </div>
+                                <div class="progress-detail">
+                                    <p  class="mb-2">Tổng Tiền Nước</p>
+                                    <h4 class="counter">{{ number_format($yearlyTotals['water'], 0) }} </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <div   class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="800">
+                        <div class="card-body">
+                            <div class="progress-widget">
+                                <div id="circle-progress-02" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="80" data-type="percent">
+                                    <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
+                                    </svg>
+                                </div>
+                                <div class="progress-detail">
+                                    <p class="mb-2">Tổng Tiền Điện</p>
+                                    <h4  class="counter">{{ number_format($yearlyTotals['electricity'], 0) }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <div class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="900">
+                        <div class="card-body">
+                            <div class="progress-widget">
+                                <div id="circle-progress-03" class="text-center circle-progress-01 circle-progress circle-progress-primary" data-min-value="0" data-max-value="100" data-value="70" data-type="percent">
+                                    <svg class="card-slie-arrow icon-24" width="24" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M19,6.41L17.59,5L7,15.59V9H5V19H15V17H8.41L19,6.41Z" />
+                                    </svg>
+                                </div>
+                                <div class="progress-detail">
+                                    <p  class="mb-2">Tổng Tiền Nhà</p>
+                                    <h4 class="counter">{{ number_format($yearlyTotals['house_bill'], 0) }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-3">
+                    <div class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="card-body">
+                            <div class="progress-widget">
+                                <div id="circle-progress-04" class="text-center circle-progress-01 circle-progress circle-progress-info" data-min-value="0" data-max-value="100" data-value="60" data-type="percent">
+                                    <svg class="card-slie-arrow icon-24" width="24px"  viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
+                                    </svg>
+                                </div>
+                                <div class="progress-detail">
+                                    <p  class="mb-2">Tổng Tiền DV</p>
+                                    <h4 class="counter">{{ number_format($totalPrice)}}</h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                             <form action="{{ route('dashboard') }}" method="GET" id="yearForm" class=" mt-2 ms-2">
                                 <label for="year">Chọn năm:</label>
                                 <select  id="year" name="year" onchange="this.form.submit()">
-                                    <option class="form-select" value="" disabled selected>Chọn năm</option> <!-- Mặc định không có năm nào được chọn -->
+                                    <option class="form-select" value="" disabled selected>Chọn năm</option>
                                     @for ($i = 2022; $i <= \Carbon\Carbon::now()->year; $i++)
                                         <option  value="{{ $i }}" {{ request('year') == $i ? 'selected' : '' }}>
                                             {{ $i }}
@@ -165,9 +165,9 @@
                                 <div class="mb-4">
                                     <div class="flex-wrap d-flex justify-content-between">
                                         <h3  class="mb-4 mt-2">Tổng Danh Thu</h3>
-                                        <h2 class="mb-2">{{ number_format($totalAmountAll)}} VNĐ</h2>
 
                                     </div>
+                                    <h2 class="mb-2">{{ number_format($totalAmountAll)}} VNĐ</h2>
 
                                 </div>
 
@@ -197,8 +197,8 @@
     <script>
         var options = {
             chart: {
-                type: 'bar', // Loại biểu đồ là bar (cột)
-                height: 660
+                type: 'bar',
+                height: 650
             },
             series: [{
                 name: 'Tổng tiền',
@@ -216,10 +216,10 @@
             },
             fill: {
                 opacity: 1,
-                colors: ['#008FFB'], // Màu sắc cột
+                colors: ['#008FFB'],
             },
             dataLabels: {
-                enabled: false, // Tắt nhãn dữ liệu trên cột
+                enabled: false,
             },
             title: {
                 text: 'Tổng tiền thanh toán theo từng tháng',
@@ -232,7 +232,7 @@
             tooltip: {
                 y: {
                     formatter: function(value) {
-                        return value.toLocaleString() + ' VND'; // Định dạng tooltip hiển thị số tiền
+                        return value.toLocaleString() + ' VND';
                     }
                 }
             }

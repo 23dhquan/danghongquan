@@ -81,13 +81,12 @@
                                 <input type="file" class="form-control" id="identity_card_image" name="identity_card_image[]" multiple>
                             </div>
                             <div id="preview" class="d-flex flex-wrap mt-2">
-                                @if(isset($house->images) && $house->images->isNotEmpty())
-                                    @foreach($house->images as $image)
-                                        <img src="{{ asset($image->image_path) }}" alt="House Image" style="width: 100px; height: 100px; object-fit: cover;" class="rounded">
+                                @if($tenantDetail->identity_card_image)
+                                    @foreach(json_decode($tenantDetail->identity_card_image) as $image)
+                                        <img src="{{ asset($image) }}" alt="Identity Card Image">
                                     @endforeach
-                                @else
-                                    <p class="text-muted">Không có hình ảnh nào.</p>
                                 @endif
+
 
                             </div>
 
@@ -127,10 +126,9 @@
     </div>
 
     <script>
-        // Hiển thị ảnh đã chọn cho identity_card_image
         document.getElementById('identity_card_image').addEventListener('change', function(event) {
             const preview = document.getElementById('preview');
-            preview.innerHTML = '';  // Xóa nội dung trước đó (nếu có)
+            preview.innerHTML = '';
 
             const files = event.target.files;
             if (files) {

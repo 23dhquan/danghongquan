@@ -32,7 +32,6 @@
                                 </button>
                                 <div class="text-end">
                                     <h4 class="card-title text-white">{{ $house->name }}</h4>
-                                    <p class=" text-white">{{ $house->description }}</p>
                                     <p class="text-white"><strong>Giá: </strong>{{ number_format($house->price, 0, ',', '.') }} VNĐ</p>
                                     <p class="text-white"><strong>Khu vực: </strong>{{ $house->area_name }}</p>
                                 </div>

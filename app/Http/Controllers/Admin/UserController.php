@@ -44,7 +44,6 @@ class UserController extends Controller
             'phone' => 'required|string',
         ]);
 
-        // Rút gọn phần tạo người dùng
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -91,7 +90,6 @@ class UserController extends Controller
 
         ]);
 
-        // Cập nhật thông tin người dùng
         $users->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -114,10 +112,10 @@ class UserController extends Controller
             return response()->json(['success' => false, 'message' => 'User not found'], 404);
         }
 
-        $user->status = !$user->status; // Đảo trạng thái
+        $user->status = !$user->status;
         $user->save();
 
-        return response()->json(['success' => true, 'status' => $user->status]); // Trả về trạng thái mới
+        return response()->json(['success' => true, 'status' => $user->status]);
     }
 
 

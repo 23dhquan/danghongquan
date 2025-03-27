@@ -123,7 +123,6 @@ class PaymentBillController extends Controller
 
     public function cancel()
     {
-        // Xử lý khi người dùng hủy giao dịch
         Log::info('Giao dịch VNPay đã bị hủy.');
         return response()->json(['message' => 'Giao dịch đã bị hủy.']);
     }

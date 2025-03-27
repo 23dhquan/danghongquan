@@ -97,8 +97,8 @@
                             <div class="mb-3">
                                 <label for="address" class="form-label">Giới Tính</label>
                                 <select name="gender" id="gender">
-                                    <option value="male">Nữ</option>
                                     <option value="female">Nam</option>
+                                    <option value="male">Nữ</option>
                                 </select>
                             </div>
                             <div class="mb-3">

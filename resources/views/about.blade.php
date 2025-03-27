@@ -37,14 +37,14 @@
     <div class="container">
         <div class="menu-bg-wrap">
             <div class="site-navigation">
-                <a href="index.html" class="logo m-0 float-start">RommMate</a>
+                <a href="{{route('home.index')}}" class="logo m-0 float-start">RommMate</a>
 
                 <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
                     <li class="{{ Route::currentRouteName() == 'home.index' ? 'active' : '' }}">
                         <a href="{{ route('home.index') }}">Trang Chủ</a>
                     </li>
                     <li class="{{ Route::currentRouteName() == 'home.house' ? 'active' : '' }}">
-                        <a href="{{route('home.house')}}">Nhà Thuê</a>
+                        <a href="{{route('home.house')}}">Cho Thuê</a>
                     </li>
                     <li class="{{ Route::currentRouteName() == 'home.contact' ? 'active' : '' }}">
                         <a href="{{route('home.contact')}}">Liên Hệ</a>

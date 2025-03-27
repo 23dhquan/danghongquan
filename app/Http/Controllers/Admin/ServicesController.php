@@ -37,11 +37,10 @@ class ServicesController extends Controller
 
     public function edit($service_id)
     {
-        $service = Service::findOrFail($service_id); // Tìm dịch vụ theo ID
+        $service = Service::findOrFail($service_id);
         return view('admin.page.service.edit_service', compact('service'));
     }
 
-    // Thêm phương thức update
     public function update(Request $request, $service_id)
     {
         $request->validate([
@@ -49,7 +48,7 @@ class ServicesController extends Controller
             'price' => 'required|integer',
         ]);
 
-        $service = Service::findOrFail($service_id); // Tìm dịch vụ theo ID
+        $service = Service::findOrFail($service_id);
         $service->update([
             'name' => $request->name,
             'price' => $request->price,

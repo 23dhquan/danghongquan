@@ -51,7 +51,7 @@ class DepositController extends Controller
 
         $tenants = Tenant::where('is_delete', 0)
             ->where(function ($query) use ($currentAreaId) {
-                if ($currentAreaId != 1) {
+                if ($currentAreaId === 1) {
                     $query->whereIn('house_id', function ($subQuery) use ($currentAreaId) {
                         $subQuery->select('house_id')
                             ->from('houses')

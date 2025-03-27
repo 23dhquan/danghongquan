@@ -47,7 +47,8 @@
                         <a href="{{ route('home.index') }}">Trang Chủ</a>
                     </li>
                     <li class="{{ Route::currentRouteName() == 'home.house' ? 'active' : '' }}">
-                        <a href="{{route('home.house')}}">Nhà Thuê</a>
+                        <a href="{{route('home.house')}}">Cho Thuê</a>
+
                     </li>
                     <li class="{{ Route::currentRouteName() == 'home.contact' ? 'active' : '' }}">
                         <a href="{{route('home.contact')}}">Liên Hệ</a>
@@ -124,7 +125,7 @@
                 <p style="margin-top: -10px; white-space: pre-line;" class="d-block text-black-50 mb-2">{{ $house->description }}</p>
 
                 <!-- Thông tin thêm -->
-                <p><strong>Price:</strong> ${{ number_format($house->price, 0, '.', ',') }}</p>
+                <h3><strong>Giá Tiền:</strong> ${{ number_format($house->price, 0, '.', ',') }}</h3>
 
 
                 <!-- Thông tin đại lý -->
@@ -142,6 +143,9 @@
                         <div class="meta mb-3 mt-2">{{$house->user_note}}</div>
                         <p>
                            Liên hệ: {{$house->user_email}}
+                        </p>
+                        <p>
+                            Số điện thoại: {{$house->user_phone}}
                         </p>
                         <ul class="list-unstyled social dark-hover d-flex">
                             <li class="me-1">

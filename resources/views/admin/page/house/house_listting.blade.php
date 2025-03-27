@@ -40,8 +40,9 @@
                                         <td>{{ $house->name }}</td>
                                         <td>{{ number_format($house->price, 0, ',', '.') }} VNĐ</td>
 
-                                        <td>{{ $house->description }}</td>
-                                        <td>{{ $house->area_name }}
+                                        <td>  {{ \Illuminate\Support\Str::limit($house->description, 100) }}</td>
+
+                                        <td >{{ $house->area_name }}
 
 
 

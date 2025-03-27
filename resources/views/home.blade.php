@@ -47,7 +47,8 @@
                             <a href="{{ route('home.index') }}">Trang Chủ</a>
                         </li>
                         <li class="{{ Route::currentRouteName() == 'home.house' ? 'active' : '' }}">
-                            <a href="{{route('home.house')}}">Nhà Thuê</a>
+                            <a href="{{route('home.house')}}">Cho Thuê</a>
+
                         </li>
                         <li class="{{ Route::currentRouteName() == 'home.contact' ? 'active' : '' }}">
                         <a href="{{route('home.contact')}}">Liên Hệ</a>
@@ -111,14 +112,14 @@
                                 {{--                                <a href="{{ route('property.details', $house->house_id) }}"
                                 class="img">--}}
 
-                                <a href="#" class="img">
+                                <a href="{{ route('home.show', $house->house_id) }}" class="img">
                                     <img style="width: 100%; height: 400px; " src="{{asset($house->house_image)}}" alt="{{ $house->name }}"
                                         class="img-fluid" />
                                 </a>
 
                                 <div class="property-content">
                                     <div class="price mb-2">
-                                        <span>${{ number_format($house->price, 2, '.', ',') }}</span>
+                                        <span>${{ number_format($house->price, 0, '.', ',') }}</span>
                                     </div>
                                     <div>
                                         <span class="d-block mb-2 text-black-50">
@@ -129,11 +130,12 @@
                                             {{ $house->name ?? 'Unknown Area' }}
                                         </span>
                                         <span class="d-block mb-2 text-black-50">
-                                            {{ $house->description }}
+                                            {{ \Illuminate\Support\Str::limit($house->description, 50) }}
                                         </span>
 
 
-                                        <a href="" class="btn btn-primary py-2 px-3">
+
+                                        <a href="{{ route('home.show', $house->house_id) }}" class="btn btn-primary py-2 px-3">
                                             Chi tiết
                                         </a>
 

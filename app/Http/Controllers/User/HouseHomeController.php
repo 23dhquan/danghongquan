@@ -68,6 +68,7 @@ class HouseHomeController extends Controller
         $house->user_note = User::where('area_id', $house->area_id)->first()?->note;
         $house->user_avatar = User::where('area_id', $house->area_id)->first()?->avatar;
         $house->user_email = User::where('area_id', $house->area_id)->first()?->email;
+        $house->user_phone = User::where('area_id', $house->area_id)->first()?->phone;
 
 
         return view('house-detail', compact('house'));

@@ -8,18 +8,17 @@ use App\Models\House;
 use App\Models\HouseBill;
 use App\Models\HouseService;
 use App\Models\Service;
+use App\Models\Tenant;
 use App\Models\TenantDetail;
 use App\Models\WaterBill;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+
 
 class DasboardController extends Controller
 {
     public function index(Request $request)
     {
-
         $loggedInUser = auth()->user();
 
         $year = $request->input('year', Carbon::now()->year);
@@ -33,34 +32,25 @@ class DasboardController extends Controller
         $waterTotalForYear = 0;
         $electricityTotalForYear = 0;
         $houseBillTotalForYear = 0;
-
-
         for ($month = 1; $month <= 12; $month++) {
             $totalAmountForMonth = 0;
-
             foreach ($houses as $house) {
                 $waterBillAmount = WaterBill::where('house_id', $house->house_id)
                     ->whereYear('billing_date', $year)
                     ->whereMonth('billing_date', $month)
                     ->sum('amount');
                 $electricityBillAmount = ElectricityBill::where('house_id', $house->house_id)
-                    ->whereYear('billing_date', $year)  // Lọc theo năm
-                    ->whereMonth('billing_date', $month)  // Lọc theo tháng
+                    ->whereYear('billing_date', $year)
+                    ->whereMonth('billing_date', $month)
                     ->sum('amount');
-
                 $houseBillAmount = HouseBill::where('house_id', $house->house_id)
-                    ->whereYear('billing_date', $year)  // Lọc theo năm
-                    ->whereMonth('billing_date', $month)  // Lọc theo tháng
+                    ->whereYear('billing_date', $year)
+                    ->whereMonth('billing_date', $month)
                     ->sum('amount');
-
                 $totalAmountForMonth += $waterBillAmount + $electricityBillAmount + $houseBillAmount;
-
                 $waterTotalForYear += $waterBillAmount;
                 $electricityTotalForYear += $electricityBillAmount;
                 $houseBillTotalForYear += $houseBillAmount;
-
-
-
             }
 
             $monthlyTotals[$month] = $totalAmountForMonth;
@@ -95,8 +85,29 @@ class DasboardController extends Controller
         }
         $totalAmountAll = $totalPrice + $waterBillAmountTotal + $electricityBillAmountTotal + $houseBillAmountTotal;
 
-        $toltalTenant = TenantDetail::count();
-        $toltalHouse = House::count();
+        $currentUser = auth()->user();
+        $currentAreaId = $currentUser->area_id;
+
+        $tenantIds = Tenant::whereHas('house', function ($query) use ($currentAreaId) {
+            $query->where('area_id', $currentAreaId);
+        })->pluck('tenant_id');
+        if($currentUser-> is_super_admin ==1 )
+        {
+            $toltalTenant = TenantDetail::all()->count();
+        }
+        else
+        {
+            $toltalTenant = TenantDetail::whereIn('tenant_id', $tenantIds)->count();
+        }
+        if ($currentUser-> is_super_admin ==1)
+        {
+            $toltalHouse = House::all()->count();
+        }
+        else
+        {
+            $toltalHouse = House::where('area_id', $currentAreaId)->count();
+        }
+
         return view('admin.dashboard', compact('monthlyTotals', 'toltalTenant' ,'toltalHouse' , 'yearlyTotals', 'year','totalPrice','totalAmountAll'));
 
 

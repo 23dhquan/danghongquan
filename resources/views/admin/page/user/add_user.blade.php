@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label for="role">Vai Trò</label>
                                 <select name="role" id="role" class="form-control">
-                                    @if(auth()->check() && auth()->user()->role === 'admin' && auth()->user()->is_supper_admin ===1)
+                                    @if(auth()->check() && auth()->user()->role === 'admin' && auth()->user()->is_super_admin ===1)
                                         <!-- Nếu người dùng là admin và area_id = 0, hiển thị cả hai tùy chọn -->
                                         <option value="tenant">Tenant</option>
                                         <option value="admin">Admin</option>

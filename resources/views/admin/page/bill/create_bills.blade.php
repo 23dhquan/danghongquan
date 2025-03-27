@@ -54,16 +54,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        // Giá trị ngày muốn truyền vào (định dạng yyyy/mm/dd)
-        var dateInputValue = '2024/11/06'; // Ví dụ
+        // Lấy ngày hiện tại
+        var currentDate = new Date();
 
-        // Chuyển đổi từ định dạng yyyy/mm/dd sang yyyy-mm-dd (format mà input type="date" yêu cầu)
-        var dateParts = dateInputValue.split('/'); // Tách chuỗi yyyy/mm/dd
-        var formattedDate = dateParts[0] + '-' + (dateParts[1]).padStart(2, '0') + '-' + (dateParts[2]).padStart(2, '0');
+        // Chuyển đổi thành định dạng yyyy-mm-dd
+        var year = currentDate.getFullYear();
+        var month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Tháng từ 0-11, cần cộng thêm 1 và đảm bảo 2 chữ số
+        var day = currentDate.getDate().toString().padStart(2, '0');
+
+        var formattedDate = year + '-' + month + '-' + day;
 
         // Gán giá trị vào input
         document.getElementById('billing_date').value = formattedDate;
-
-
     </script>
+
 @endsection

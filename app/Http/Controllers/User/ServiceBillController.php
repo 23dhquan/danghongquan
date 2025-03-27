@@ -33,9 +33,7 @@ class ServiceBillController extends Controller
         return view('user.service', compact('services', 'registeredServices'));
     }
 
-    /**
-     * Đăng ký dịch vụ mới
-     */
+
     public function register(Request $request)
     {
         $validatedData = $request->validate([

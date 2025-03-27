@@ -18,26 +18,22 @@ class AreaController extends Controller
     }
     public function create()
     {
-        return view('admin.page.area.add_area'); // View form add
+        return view('admin.page.area.add_area');
     }
 
-    // Xử lý thêm mới dữ liệu
     public function store(Request $request)
     {
-        // Validate dữ liệu
         $request->validate([
             'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
         ]);
 
-        // Tạo mới một Area
         Area::create([
             'name' => $request->name,
             'address' => $request->address,
         ]);
 
 
-        // Chuyển hướng sau khi thêm thành công
         return redirect()->route('area.list');
     }
 

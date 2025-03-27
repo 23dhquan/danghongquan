@@ -25,14 +25,12 @@ class BillUserController extends Controller
 
         $houseIds = $tenants->pluck('house_id')->all();
 
-        // Lấy dữ liệu tháng và năm từ request hoặc mặc định là tháng/năm hiện tại
         $selectedMonth = $request->input('month', Carbon::now()->month);
         $selectedYear = $request->input('year', Carbon::now()->year);
 
         $startDate = Carbon::createFromDate($selectedYear, $selectedMonth, 1)->startOfMonth();
         $endDate = Carbon::createFromDate($selectedYear, $selectedMonth, 1)->endOfMonth();
 
-        // Lọc hóa đơn theo thời gian
         $waterBillsQuery = WaterBill::whereIn('house_id', $houseIds)
             ->whereBetween('billing_date', [$startDate, $endDate]);
         $waterBills = $waterBillsQuery->get();
@@ -59,7 +57,6 @@ class BillUserController extends Controller
             $houseBill->house_name = $houses->get($houseBill->house_id);
         }
 
-        // Tính tổng tiền
         $totalWaterAmount = $waterBills->where('status', 0)->sum('amount');
         $totalElectricityAmount = $electricityBills->where('status', 0)->sum('amount');
         $totalHouseAmount = $houseBills->where('status', 0)->sum('amount');
@@ -89,12 +86,10 @@ class BillUserController extends Controller
 
         $penaltiesQuery = Penalty::where('house_id', $house_id);
 
-        // Lấy tháng và năm hiện tại nếu không có trong request
         $currentDate = Carbon::now();
         $selectedMonth = $request->input('month', $currentDate->month);
         $selectedYear = $request->input('year', $currentDate->year);
 
-        // Lọc dữ liệu theo tháng và năm
         $penaltiesQuery->whereYear('penalty_date', $selectedYear)
             ->whereMonth('penalty_date', $selectedMonth);
 

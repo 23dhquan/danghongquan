@@ -26,7 +26,6 @@ class TenantController extends Controller
         if ($curentArea->is_super_admin === 1) {
             $tenants = Tenant::where('is_delete', 0)->get();
         } else {
-            // Lấy danh sách tenants có area_id khớp với area_id của user
             $tenants = Tenant::whereHas('house', function ($query) use ($curentArea) {
                 $query->where('area_id', $curentArea->area_id);
             })->where('is_delete', 0)->get();
@@ -82,7 +81,6 @@ class TenantController extends Controller
             return response()->json(['success' => false, 'message' => 'Tenant not found'], 404);
         }
 
-        // Kiểm tra nếu có khoản phạt với status = 0
         $house_id = $tenant->house_id;
         $hasUnresolvedPenalty = Penalty::where('house_id', $house_id)
             ->where('status', 0)

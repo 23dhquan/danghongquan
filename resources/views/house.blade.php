@@ -47,7 +47,8 @@
                         <a href="{{ route('home.index') }}">Trang Chủ</a>
                     </li>
                     <li class="{{ Route::currentRouteName() == 'home.house' ? 'active' : '' }}">
-                        <a href="{{route('home.house')}}">Nhà Thuê</a>
+                        <a href="{{route('home.house')}}">Cho Thuê</a>
+
                     </li>
                     <li class="{{ Route::currentRouteName() == 'home.contact' ? 'active' : '' }}">
                     <a href="{{route('home.contact')}}">Liên Hệ</a>
@@ -270,20 +271,14 @@
     function formatDescription(description) {
         if (!description) return "N/A";
 
-        // Kiểm tra nếu có nhiều dòng
-        const lines = description.split('\n');
-        if (lines.length > 1) {
-            return lines[0]; // Chỉ hiển thị dòng đầu tiên
+        // Kiểm tra độ dài và cắt chuỗi nếu cần
+        if (description.length > 50) {
+            return description.slice(0, 50) + " ..."; // Hiển thị tối đa 50 ký tự
         }
 
-        // Nếu chỉ có một dòng, kiểm tra độ dài
-        const singleLine = lines[0];
-        if (singleLine.length > 30) {
-            return singleLine.slice(0, 30) + " ..."; // Hiển thị tối đa 30 ký tự
-        }
-
-        return singleLine; // Hiển thị toàn bộ nếu ngắn
+        return description; // Nếu chuỗi ngắn hơn hoặc bằng 50 ký tự, hiển thị toàn bộ
     }
+
     document.addEventListener("DOMContentLoaded", function () {
         const houseData = JSON.parse(document.getElementById("house-data").textContent);
         const itemsPerLoad = 3; // Hiển thị tối đa 3 sản phẩm mỗi lần load thêm
@@ -308,7 +303,7 @@
                 const houseHTML = `
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                     <div class="property-item mb-30">
-                        <a href="{{ url('property/${house.house_id}') }}" class="img">
+                        <a href="{{ url('house-detail/${house.house_id}') }}" class="img">
                             <img  style="width: 100%; height: 500px"  src="${houseImage}" alt="Image" class="img-fluid" />
                         </a>
                         <div class="property-content">
@@ -320,6 +315,7 @@
                                 <span style="margin-top: -10px" class="d-block text-black-50 mb-2">
                                     ${formatDescription(house.description)}
                                 </span>
+
 
 
                                 <a href="{{ url('house-detail/${house.house_id}') }}" class="btn btn-primary py-2 px-3">Chi tiết</a>

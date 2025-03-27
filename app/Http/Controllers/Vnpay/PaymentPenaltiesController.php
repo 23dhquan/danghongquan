@@ -40,7 +40,6 @@ class PaymentPenaltiesController extends Controller
 
         session([$transactionId . '_penalties_bill_ids' => $request->input('penalties_bill_id')]);
 
-
         ksort($data);
 
         $hashData = http_build_query($data);
@@ -70,13 +69,13 @@ class PaymentPenaltiesController extends Controller
 
             if ($transactionId) {
 
-                $penaltiesIds = session($transactionId . '_penalties_bill_ids'); // Lấy mảng IDs
+                $penaltiesIds = session($transactionId . '_penalties_bill_ids');
 
                 if ($penaltiesIds && is_array($penaltiesIds)) {
                     foreach ($penaltiesIds as $penaltyId) {
                         $penalty = Penalty::find($penaltyId);
                         if ($penalty) {
-                            $penalty->status = 1; // Cập nhật status
+                            $penalty->status = 1;
                             $penalty->save();
                         }
                     }

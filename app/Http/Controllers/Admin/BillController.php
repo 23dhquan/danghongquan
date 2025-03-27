@@ -27,7 +27,6 @@ class BillController extends Controller
             $tenants = Tenant::where('is_delete', 0)->whereIn('house_id', $houses)->get();
         }
 
-        // Thêm thông tin bổ sung cho từng tenant
         foreach ($tenants as $tenant) {
             $tenant->house_name = House::find($tenant->house_id)->name;
             $tenant->user_name = User::find($tenant->user_id)->name;
